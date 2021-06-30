@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {activities, Activity} from '../../dashboard/dashboard-components/activity/activity-data';
+import {AuthService} from '../../auth/auth.service';
+import {TokenStorageService} from '../../auth/token-storage.service';
+import {Router} from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -27,15 +30,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
+  role: string[];
+  public nameRole: string | undefined;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
   dataSource = ELEMENT_DATA;
 
   activityData: Activity[];
 
-  constructor() {
-
+  constructor(private authService: AuthService,
+              public tokenStorage: TokenStorageService,
+              private router: Router) {
     this.activityData = activities;
+    this.role = this.tokenStorage.getAuthorities();
+    if (this.role.includes('ROLE_ADMIN')) {
+      this.nameRole = 'admin';
+    } else if (this.role.includes('ROLE_PM_MK')) {
+      this.nameRole = 'pmmarketing';
+    } else if (this.role.includes('ROLE_PM_SALE')) {
+      this.nameRole = 'pmsale';
+    } else {
+      this.nameRole = '1';
+    }
   }
 
 

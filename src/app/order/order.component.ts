@@ -2,6 +2,9 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {activities, Activity} from '../dashboard/dashboard-components/activity/activity-data';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {AuthService} from '../auth/auth.service';
+import {TokenStorageService} from '../auth/token-storage.service';
+import {Router} from '@angular/router';
 
 export interface PeriodicElement {
   category: string;
@@ -61,7 +64,8 @@ export class OrderComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['orderId', 'category', 'item',  'name', 'phone', 'address', 'detail', 'createDate', 'username', 'deliveryStatus', 'payment'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  role: string[];
+  public nameRole: string | undefined;
   activityData: Activity[];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
@@ -70,9 +74,22 @@ export class OrderComponent implements AfterViewInit {
     // @ts-ignore
     this.dataSource.paginator = this.paginator;
   }
-  constructor() {
-
+  constructor(private authService: AuthService,
+              public tokenStorage: TokenStorageService,
+              private router: Router) {
     this.activityData = activities;
+    this.role = this.tokenStorage.getAuthorities();
+    if (this.role.includes('ROLE_ADMIN')) {
+      this.nameRole = 'admin';
+    } else if (this.role.includes('ROLE_PM_MK')) {
+      this.nameRole = 'pmmarketing';
+    } else if (this.role.includes('ROLE_PM_SALE')) {
+      this.nameRole = 'pmsale';
+    } else if (this.role.includes('ROLE_MK')) {
+      this.nameRole = 'marketing';
+    } else if (this.role.includes('ROLE_SALE')) {
+      this.nameRole = 'sale';
+    }
   }
 
 }

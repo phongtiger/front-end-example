@@ -4,6 +4,7 @@ import {AuthLoginInfo} from "../../auth/login-info";
 import {AuthService} from "../../auth/auth.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {JwtResponse} from "../../auth/jwt-response";
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   activityData: Activity[];
 
   constructor(private authService: AuthService,
-              private tokenStorage: TokenStorageService) {
+              private tokenStorage: TokenStorageService,
+              private router: Router) {
 
     this.activityData = activities;
   }
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getAuthorities();
         console.log(this.roles);
         // this.reloadPage();
+        this.router.navigate(['/order']);
       },
       error => {
         console.log(error);

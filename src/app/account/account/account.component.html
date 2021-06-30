@@ -1,8 +1,9 @@
 <mat-card>
-  <mat-tab-group>
+
+  <mat-tab-group *ngIf="nameRole == 'admin' || nameRole == 'pmmarketing' || nameRole == 'pmsale' ">
     <!-- Tab 1 -->
     <mat-tab label="Danh sách tài khoản">
-      <mat-card-content>
+      <mat-card-content >
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
 
           <!--- Note that these columns can be defined in any order.
