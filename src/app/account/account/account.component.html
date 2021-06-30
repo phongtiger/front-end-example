@@ -80,7 +80,8 @@
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
                 <input matInput placeholder="Nhập lại mật khẩu" type="password" formControlName="passwordRepeat">
-                <p *ngIf="errorMK">Mật khẩu không khớp. Vui lòng nhập lại!</p>
+                <p ></p>
+                <div *ngIf="errorMK" class="alert alert-danger"><code>Mật khẩu không khớp. Vui lòng nhập lại!</code></div>
               </mat-form-field>
             </div>
 

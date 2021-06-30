@@ -5,6 +5,7 @@ import {TokenStorageService} from '../../auth/token-storage.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {delay} from 'rxjs/operators';
+import {SignUpInfo} from "../../auth/signup-info";
 
 export interface PeriodicElement {
   name: string;
@@ -47,6 +48,7 @@ export class AccountComponent implements OnInit {
     role: new FormControl('')
   });
   errorMK = false;
+  private signupInfo: SignUpInfo | undefined;
 
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
@@ -75,5 +77,22 @@ export class AccountComponent implements OnInit {
       this.errorMK = true;
       setTimeout( () => { this.errorMK = false; }, 10000 );
     }
+    console.log(this.accountForm.value);
+    this.signupInfo = new SignUpInfo(
+      this.accountForm.value.name,
+      this.accountForm.value.username,
+      this.accountForm.value.email,
+      this.accountForm.value.password,
+      this.accountForm.value.role);
+    console.log(this.signupInfo);
+    this.authService.signUp(this.signupInfo).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
   }
 }
