@@ -9,7 +9,7 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/login',
         pathMatch: 'full'
       },
       {
@@ -18,7 +18,7 @@ export const AppRoutes: Routes = [
           () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
       },
       {
-        path: 'dashboard',
+        path: 'login',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]

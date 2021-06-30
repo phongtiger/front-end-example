@@ -23,6 +23,7 @@ import { CategoryComponent } from './category/category.component';
 import { ItemComponent } from './item/item.component';
 import { OrderComponent } from './order/order.component';
 import {MatNativeDateModule} from '@angular/material/core';
+import {httpInterceptorProviders} from "./auth/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
-    }
+    },
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
