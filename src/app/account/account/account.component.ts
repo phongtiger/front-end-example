@@ -3,6 +3,8 @@ import {activities, Activity} from '../../dashboard/dashboard-components/activit
 import {AuthService} from '../../auth/auth.service';
 import {TokenStorageService} from '../../auth/token-storage.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
+import {delay} from 'rxjs/operators';
 
 export interface PeriodicElement {
   name: string;
@@ -36,6 +38,15 @@ export class AccountComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   activityData: Activity[];
+  accountForm = new FormGroup({
+    name: new FormControl(''),
+    username: new FormControl(''),
+    password: new FormControl(''),
+    passwordRepeat: new FormControl(''),
+    email: new FormControl(''),
+    role: new FormControl('')
+  });
+  errorMK = false;
 
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
@@ -55,6 +66,14 @@ export class AccountComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.errorMK = false;
   }
 
+  save() {
+    console.log(this.accountForm.value);
+    if (this.accountForm.value.password !== this.accountForm.value.passwordRepeat) {
+      this.errorMK = true;
+      setTimeout( () => { this.errorMK = false; }, 10000 );
+    }
+  }
 }

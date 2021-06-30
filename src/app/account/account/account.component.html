@@ -51,45 +51,53 @@
         <!-- ============================================================== -->
         <!-- column -->
         <!-- ============================================================== -->
-        <form class="basic-form">
+        <form class="basic-form" [formGroup]="accountForm">
           <div fxLayout="row wrap">
             <!-- column -->
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="username">
+                <input matInput placeholder="name" type="text" formControlName="name">
               </mat-form-field>
             </div>
             <!-- column -->
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="Email" type="email">
+                <input matInput placeholder="username" type="text" formControlName="username">
               </mat-form-field>
             </div>
             <!-- column -->
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="Password" type="password">
+                <input matInput placeholder="Email" type="email" formControlName="email">
+              </mat-form-field>
+            </div>
+            <!-- column -->
+            <div fxFlex.gt-sm="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="Password" type="password" formControlName="password">
               </mat-form-field>
             </div>
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="Nhập lại mật khẩu" type="password">
+                <input matInput placeholder="Nhập lại mật khẩu" type="password" formControlName="passwordRepeat">
+                <p *ngIf="errorMK">Mật khẩu không khớp. Vui lòng nhập lại!</p>
               </mat-form-field>
             </div>
 
             <!-- column -->
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <mat-select placeholder="Chọn quyền">
-                  <mat-option value="option">PM</mat-option>
-                  <mat-option value="option">Marketing</mat-option>
-                  <mat-option value="option">Sales</mat-option>
+                <mat-select placeholder="Chọn quyền" formControlName="role">
+                  <mat-option value="ROLE_PM_MK">Lead Marketing</mat-option>
+                  <mat-option value="ROLE_PM_SALE">Lead Sale</mat-option>
+                  <mat-option value="ROLE_SALE">Sale</mat-option>
+                  <mat-option value="ROLE_MK">Marketing</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <!-- column -->
             <div fxFlex.gt-sm="100" fxFlex="100">
-              <button mat-raised-button color="primary">Tạo tài khoản</button>
+              <button mat-raised-button color="primary" type="submit" (click)="save()">Tạo tài khoản</button>
             </div>
           </div>
         </form>
