@@ -1,27 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {AuthLoginInfo} from "../auth/login-info";
+import {JwtResponse} from "../auth/jwt-response";
+import {SignUpInfo} from "../auth/signup-info";
+import {environment} from "../../environments/environment";
+import {UserInfo} from "../account/account/user-info";
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private userUrl = 'https://happybuying.site/api/test/user';
-  private pmUrl = 'https://happybuying.site/api/test/pm';
-  private adminUrl = 'https://happybuying.site/api/test/admin';
-
   constructor(private http: HttpClient) { }
 
-  getUserBoard(): Observable<string> {
-    return this.http.get(this.userUrl, { responseType: 'text' });
+  getUserBoard(): Observable<any> {
+    return this.http.get(environment.url + '/users/search', {headers: httpOptions.headers});
   }
 
-  getPMBoard(): Observable<string> {
-    return this.http.get(this.pmUrl, { responseType: 'text' });
+  changePassword(u : UserInfo): Observable<any> {
+    return this.http.put(environment.url + '/pass', u,{headers: httpOptions.headers});
   }
-
-  getAdminBoard(): Observable<string> {
-    return this.http.get(this.adminUrl, { responseType: 'text' });
-  }
+  //
+  // getAdminBoard(): Observable<string> {
+  //   return this.http.get(environment.url, { responseType: 'text' });
+  // }
 }

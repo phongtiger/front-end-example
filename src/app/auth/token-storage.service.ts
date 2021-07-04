@@ -9,6 +9,7 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
 })
 export class TokenStorageService {
   private roles: Array<string> = [];
+  public roleRoot = '';
   constructor() { }
 
   signOut() {
@@ -42,7 +43,6 @@ export class TokenStorageService {
 
   public getAuthorities(): string[] {
     this.roles = [];
-
     if (sessionStorage.getItem(TOKEN_KEY)) {
       JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY) as string).forEach((authority: { authority: string; }) => {
         this.roles.push(authority.authority);

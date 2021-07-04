@@ -31,9 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    console.log(this.form);
-
+  onSubmit($event: Event) {
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
@@ -41,22 +39,31 @@ export class LoginComponent implements OnInit {
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.data = data;
-        console.log(data);
         this.tokenStorage.saveToken(this.data.accessToken);
         this.tokenStorage.saveUsername(this.data.username);
         this.tokenStorage.saveAuthorities(this.data.authorities);
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        console.log(this.roles);
-        // this.reloadPage();
-        this.router.navigate(['/order']);
+        if (this.roles.includes('ROLE_ADMIN')) {
+          this.router.navigate(['/admin']);
+        } else if (this.roles.includes('ROLE_PM_MK')) {
+          this.router.navigate(['/marketing']);
+        } else if (this.roles.includes('ROLE_PM_SALE')) {
+          this.router.navigate(['/sale']);
+        } else if (this.roles.includes('ROLE_MK')) {
+          this.router.navigate(['/marketing']);
+        } else if (this.roles.includes('ROLE_SALE')) {
+          this.router.navigate(['/sale']);
+        } else {
+          this.router.navigate(['/login']);
+        }
       },
       error => {
         console.log(error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
+        setTimeout( () => { this.isLoginFailed = false; }, 4000 );
       }
     );
   }

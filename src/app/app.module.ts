@@ -24,6 +24,13 @@ import { ItemComponent } from './item/item.component';
 import { OrderComponent } from './order/order.component';
 import {MatNativeDateModule} from '@angular/material/core';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
+import { OrderMarketingComponent } from './order-marketing/order-marketing.component';
+import { OrderSaleComponent } from './order-sale/order-sale.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -37,6 +44,8 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
     CategoryComponent,
     ItemComponent,
     OrderComponent,
+    OrderMarketingComponent,
+    OrderSaleComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +58,11 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
     RouterModule.forRoot(AppRoutes),
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

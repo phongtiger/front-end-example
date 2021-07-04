@@ -1,4 +1,8 @@
-<div class="example-container mat-elevation-z8">
+<mat-chip-list>
+  <mat-chip color="primary" selected="true">Permission : {{nameRole}}</mat-chip>
+</mat-chip-list>
+
+<div class="example-container mat-elevation-z8" style="margin-top: 20px">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="orderId" sticky>
       <th mat-header-cell *matHeaderCellDef> Mã đơn hàng</th>

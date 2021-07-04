@@ -2,7 +2,8 @@
 <!-- ============================================================== -->
 <!-- Profile - style you can find in header.scss -->
 <!-- ============================================================== -->
-<button style="margin-right: 30px" mat-raised-button color="link">Quyền: {{nameRole}}</button><button *ngIf="tokenStorage.getToken() != null" [matMenuTriggerFor]="profile" mat-raised-button color="link">{{tokenStorage.getUsername()}}</button>
+
+<button *ngIf="tokenStorage.getToken() != null" [matMenuTriggerFor]="profile" mat-raised-button color="link">{{tokenStorage.getUsername()}}</button>
 <mat-menu #profile="matMenu" class="mymegamenu">
     <button mat-menu-item>
         <mat-icon>settings</mat-icon> Settings </button>
