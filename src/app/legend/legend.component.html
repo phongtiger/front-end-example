@@ -1,1 +1,151 @@
-<p>legend works!</p>
+<mat-chip-list>
+  <mat-chip color="primary" selected="true">Permission : {{nameRole}}</mat-chip>
+</mat-chip-list>
+
+<div style="margin-top: 20px">
+  <table class="example-table mat-elevation-z8 mat-table" mat-table recycleRows [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="productDescription" sticky>
+      <th mat-header-cell *matHeaderCellDef> PRODUCT DESCRIPTION </th>
+      <td mat-cell *matCellDef="let element"> {{element.productDescription}} </td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="len" style="width:2rem">
+      <th mat-header-cell *matHeaderCellDef> LEN </th>
+      <td mat-cell *matCellDef="let element"> {{element.len}} </td>
+    </ng-container><!-- Weight Column -->
+
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef>PRODUCT</th>
+      <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+    </ng-container>
+    <ng-container matColumnDef="colorSizeModel">
+      <th mat-header-cell *matHeaderCellDef>COLOR SIZE MODEL</th>
+      <td mat-cell *matCellDef="let element">{{element.colorSizeModel}}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> CODE</th>
+      <td mat-cell *matCellDef="let element"> {{element.code}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="setSale">
+      <th mat-header-cell *matHeaderCellDef> SET</th>
+      <td mat-cell *matCellDef="let element"> {{element.setSale}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ivnCode" style="width: 400px">
+      <th mat-header-cell *matHeaderCellDef> IVN CODE</th>
+      <td mat-cell *matCellDef="let element"> {{element.ivnCode}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="freebies" style="width: 400px">
+      <th mat-header-cell *matHeaderCellDef> FREEBIES</th>
+      <td mat-cell *matCellDef="let element"> {{element.freebies}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="specialPromos" style="width: 400px">
+      <th mat-header-cell *matHeaderCellDef> SPECIAL PROMOS</th>
+      <td mat-cell *matCellDef="let element"> {{element.specialPromos}}</td>
+    </ng-container>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching"</td>
+    </tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 [pageSize]="pageSize"
+                 (page)="changePage($event)">
+  </mat-paginator>
+</div>
+
+<!--<mat-card>-->
+
+<!--  <mat-tab-group >-->
+<!--    &lt;!&ndash; Tab 1 &ndash;&gt;-->
+<!--    <mat-tab label="List legend" *ngIf="nameRole == 'Admin' || nameRole == 'Leader sale' ">-->
+<!--      <mat-card-content >-->
+<!--        -->
+<!--      </mat-card-content>-->
+<!--    </mat-tab>-->
+<!--    &lt;!&ndash; End Tab 1 &ndash;&gt;-->
+<!--    &lt;!&ndash; Tab 2 &ndash;&gt;-->
+<!--    <mat-tab label="Create legend" *ngIf="nameRole == 'Admin' || nameRole == 'Leader sale' ">-->
+<!--      <mat-card-content>-->
+<!--        <mat-card-title>Create account</mat-card-title>-->
+<!--        &lt;!&ndash; ============================================================== &ndash;&gt;-->
+<!--        &lt;!&ndash; column &ndash;&gt;-->
+<!--        &lt;!&ndash; ============================================================== &ndash;&gt;-->
+<!--        <form class="basic-form" [formGroup]="legendForm">-->
+<!--          <div fxLayout="row wrap">-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="PRODUCT DESCRIPTION" type="text" formControlName="productDescription">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="LEN" type="text" formControlName="len">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="PRODUCT" type="email" formControlName="product">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="COLOR SIZE MODEL" type="email" formControlName="colorSizeModel">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="CODE" type="text" formControlName="code">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="SET" type="text" formControlName="setSale">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="IVN CODE" type="text" formControlName="ivnCode">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="FREEBIES" type="text" formControlName="freebies">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; column &ndash;&gt;-->
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="SPECIAL PROMOS" type="text" formControlName="specialPromos">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+
+<!--            <div fxFlex.gt-sm="100" fxFlex="100">-->
+<!--              <button mat-raised-button color="primary" type="submit" (click)="save($event)">Create account</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </mat-card-content>-->
+<!--    </mat-tab>-->
+<!--  </mat-tab-group>-->
+<!--</mat-card>-->

@@ -18,9 +18,6 @@ import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import {LoginComponent} from '../account/login/login.component';
 import {AccountComponent} from '../account/account/account.component';
-import {CategoryComponent} from '../category/category.component';
-import {ItemComponent} from '../item/item.component';
-import {OrderComponent} from '../order/order.component';
 import {OrderMarketingComponent} from "../order-marketing/order-marketing.component";
 import {OrderSaleComponent} from "../order-sale/order-sale.component";
 import {AdminComponent} from '../admin/admin.component';
@@ -98,18 +95,6 @@ export const MaterialRoutes: Routes = [
   {
     path: 'account',
     component: AccountComponent
-  },
-  {
-    path: 'category',
-    component: CategoryComponent
-  },
-  {
-    path: 'item',
-    component: ItemComponent
-  },
-  {
-    path: 'order',
-    component: OrderComponent
   },
   {
     path: 'marketing',

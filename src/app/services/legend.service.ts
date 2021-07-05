@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {environment} from "../../environments/environment.prod";
 
 const httpOptions = {
@@ -10,11 +10,11 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class OrderServiceService {
+export class LegendService {
 
   constructor(private http: HttpClient) { }
 
-  getOrderByMarketing(params: any): Observable<any> {
-    return this.http.get(environment.url + '/orders/marketing', {headers: httpOptions.headers, params: params});
+  findAll(params: any): Observable<any> {
+    return this.http.get(environment.url + '/legend', {headers: httpOptions.headers, params: params});
   }
 }

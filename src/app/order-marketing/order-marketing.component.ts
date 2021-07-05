@@ -5,10 +5,26 @@ import {MatPaginator} from "@angular/material/paginator";
 import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
-import {PeriodicElement} from "../order/order.component";
 import {OrderServiceService} from "../services/order-service.service";
 import {tap} from "rxjs/operators";
 import {MatSnackBar} from '@angular/material/snack-bar';
+
+
+class Legend {
+  createDate = '';
+  status = '';
+  note = '';
+  assigned = '';
+  name = '';
+  phone = '';
+  address = '';
+  province = '';
+  district = '';
+  barangay = '';
+  produce = '';
+  detail = '';
+  marketer = '';
+}
 
 @Component({
   selector: 'app-order-marketing',
@@ -16,25 +32,20 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./order-marketing.component.css']
 })
 export class OrderMarketingComponent implements OnInit, AfterViewInit {
-  page = 1;
+  page = 0;
   displayedColumns: string[] = ['createDate', 'status', 'note', 'assigned', 'name', 'phone', 'address', 'province', 'district', 'barangay', 'produce', 'detail', 'marketer'];
-  dataSource = new MatTableDataSource<PeriodicElement>();
+  dataSource = new MatTableDataSource<Legend>();
   content: any;
   role: string[];
   public nameRole: string | undefined;
-  activityData: Activity[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  // tslint:disable-next-line:typedef
-  private isLoginFailed: boolean | undefined;
-  private isLoggedIn: boolean | undefined;
   length = 0;
-  pageSize = 2;
+  pageSize = 5;
 
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
               private orderService: OrderServiceService,
               public snackBar: MatSnackBar) {
-    this.activityData = activities;
     this.role = this.tokenStorage.getAuthorities();
     if (this.role.includes('ROLE_ADMIN')) {
       this.nameRole = 'admin';
@@ -65,9 +76,9 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
     this.orderService.getOrderByMarketing(params).subscribe(
       data => {
         console.log(data);
-        if (data != null && data.totalElements != null) {
+        if (data != null && data.data.totalElements != null) {
           this.length = data.data.totalElements;
-          this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+          this.dataSource = new MatTableDataSource<Legend>(data.data.content);
         } else {
           this.snackBar.open('Success! But not found data in system CMS', 'Close', {
             duration: 8000,
@@ -95,9 +106,10 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
     this.orderService.getOrderByMarketing(params).subscribe(
       data => {
         console.log(data);
-        if (data != null && data.totalElements != null) {
+        console.log(data != null && data.data.totalElements != null)
+        if (data != null && data.data.totalElements != null) {
           this.length = data.data.totalElements;
-          this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+          this.dataSource = new MatTableDataSource<Legend>(data.data.content);
         } else {
           this.snackBar.open('Success! But not found data in system CMS', 'Close', {
             duration: 8000,

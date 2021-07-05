@@ -5,6 +5,8 @@ import {AuthService} from "../../auth/auth.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {JwtResponse} from "../../auth/jwt-response";
 import {Router, RouterLink} from '@angular/router';
+import {FormControl, FormGroup} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,6 @@ import {Router, RouterLink} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -20,10 +21,15 @@ export class LoginComponent implements OnInit {
   private loginInfo: AuthLoginInfo | undefined;
   public data: JwtResponse | undefined;
   activityData: Activity[];
+  accountFormOne = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
-              private router: Router) {
+              private router: Router,
+              public snackBar: MatSnackBar) {
 
     this.activityData = activities;
   }
@@ -47,8 +53,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit($event: Event) {
     this.loginInfo = new AuthLoginInfo(
-      this.form.username,
-      this.form.password);
+      this.accountFormOne.value.username,
+      this.accountFormOne.value.password);
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
@@ -58,9 +64,13 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveAuthorities(this.data.authorities);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.snackBar.open('Login success!', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-primary']
+        });
         this.roles = this.tokenStorage.getAuthorities();
         if (this.roles.includes('ROLE_ADMIN')) {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/dashboard']);
         } else if (this.roles.includes('ROLE_PM_MK')) {
           this.router.navigate(['/marketing']);
         } else if (this.roles.includes('ROLE_PM_SALE')) {
@@ -74,10 +84,12 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
-        setTimeout( () => { this.isLoginFailed = false; }, 4000 );
+        this.snackBar.open(error.error.message, 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
       }
     );
   }

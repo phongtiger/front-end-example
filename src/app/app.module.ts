@@ -19,9 +19,6 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './account/login/login.component';
 import { AccountComponent } from './account/account/account.component';
-import { CategoryComponent } from './category/category.component';
-import { ItemComponent } from './item/item.component';
-import { OrderComponent } from './order/order.component';
 import {MatNativeDateModule} from '@angular/material/core';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import { OrderMarketingComponent } from './order-marketing/order-marketing.component';
@@ -43,9 +40,6 @@ import { LegendComponent } from './legend/legend.component';
     AppSidebarComponent,
     LoginComponent,
     AccountComponent,
-    CategoryComponent,
-    ItemComponent,
-    OrderComponent,
     OrderMarketingComponent,
     OrderSaleComponent,
     AdminComponent,
