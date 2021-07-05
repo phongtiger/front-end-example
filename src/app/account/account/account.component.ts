@@ -3,7 +3,7 @@ import {activities, Activity} from '../../dashboard/dashboard-components/activit
 import {AuthService} from '../../auth/auth.service';
 import {TokenStorageService} from '../../auth/token-storage.service';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignUpInfo} from "../../auth/signup-info";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserInfo} from "./user-info";
@@ -39,12 +39,9 @@ export class AccountComponent implements OnInit {
   private signupInfo: SignUpInfo | undefined;
   private userInfo: UserInfo | undefined;
   accountFormOne = new FormGroup({
-  name: new FormControl(''),
-  username: new FormControl(''),
-  password: new FormControl(''),
-  passwordRepeat: new FormControl(''),
-  email: new FormControl(''),
-  role: new FormControl('')
+    password: new FormControl(''),
+    newpassword: new FormControl(''),
+    renewpassword: new FormControl('')
   });
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
@@ -53,7 +50,7 @@ export class AccountComponent implements OnInit {
               private userService: UserService) {
     this.activityData = activities;
     if (this.tokenStorage.getToken() == null) {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
     }
     this.role = this.tokenStorage.getAuthorities();
     if (this.role.includes('ROLE_ADMIN')) {
@@ -120,24 +117,38 @@ export class AccountComponent implements OnInit {
   }
 
   saveOne($event: any) {
-    this.userInfo = new UserInfo(
-      this.accountForm.value.password
-    )
-    this.userService.changePassword(this.userInfo).subscribe(
-      result => {
-        this.snackBar.open('Change password success', 'Close', {
-          duration: 8000,
-          panelClass: ['mat-toolbar', 'mat-primary']
-        });
-        this.tokenStorage.signOut()
-        this.router.navigate(['/login']);
-      }, error => {
-        this.snackBar.open('An error has occurred. Please try again', 'Close', {
-          duration: 8000,
-          panelClass: ['mat-toolbar', 'mat-warn']
-        });
-      }
-    )
-
+    if (this.accountFormOne.value.password === ''
+      || this.accountFormOne.value.password === null
+      || this.accountFormOne.value.password === undefined) {
+      this.snackBar.open('Please enter old password!', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+    } else if (this.accountFormOne.value.newpassword !== this.accountFormOne.value.renewpassword) {
+      this.snackBar.open('Password not match. Please try again!', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+    }  else {
+      this.userInfo = new UserInfo(
+        this.accountFormOne.value.password,
+        this.accountFormOne.value.newpassword
+      );
+      this.userService.changePassword(this.userInfo).subscribe(
+        result => {
+          this.snackBar.open('Change password success', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+          this.tokenStorage.signOut();
+          this.router.navigate(['/login']);
+        }, error => {
+          this.snackBar.open('An error has occurred. Please try again', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          });
+        }
+      );
+    }
   }
 }

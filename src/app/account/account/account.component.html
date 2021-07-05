@@ -118,12 +118,20 @@
           <div fxLayout="row wrap">
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="Password" type="text" formControlName="password">
+                <input matInput placeholder="Password" type="password" formControlName="password">
               </mat-form-field>
             </div>
             <div fxFlex.gt-sm="100" fxFlex="100">
               <mat-form-field>
-                <input matInput placeholder="Enter new password" type="password" formControlName="new-password">
+                <input matInput placeholder="Enter new password" type="password" formControlName="newpassword">
+                <p></p>
+                <div *ngIf="errorMK" class="alert alert-danger"><code>Password incorrect. Please re-enter!</code>
+                </div>
+              </mat-form-field>
+            </div>
+            <div fxFlex.gt-sm="100" fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="Re-Enter  new password" type="password" formControlName="renewpassword">
                 <p></p>
                 <div *ngIf="errorMK" class="alert alert-danger"><code>Password incorrect. Please re-enter!</code>
                 </div>

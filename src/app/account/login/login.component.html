@@ -4,13 +4,9 @@
       <mat-tab label="">
         <div></div>
         <mat-card-content>
-
-          <!-- ============================================================== -->
-          <!-- column -->
-          <!-- ============================================================== -->
           <form class="basic-form" name="form" (ngSubmit)="f.form.valid && onSubmit($event)" #f="ngForm" novalidate>
             <div fxLayout="column" fxLayoutAlign="space-around center">
-              <mat-card-title>Đăng nhập</mat-card-title>
+              <mat-card-title>Login</mat-card-title>
             </div>
           </form>
           <form name="form" (ngSubmit)="f.form.valid && onSubmit($event)" #f="ngForm" novalidate>
@@ -33,7 +29,7 @@
             </div>
             <div class="form-group" style="text-align: center">
               <div fxFlex.gt-sm="100" fxFlex="100" style="margin-top: 20px">
-                <button type="submit" mat-raised-button color="primary">Đăng nhập</button>
+                <button type="submit" mat-raised-button color="primary">Login</button>
               </div>
             </div>
             <div style="text-align: center; margin-top:20px">
@@ -42,8 +38,6 @@
               </div>
             </div>
           </form>
-
-
         </mat-card-content>
       </mat-tab>
     </mat-tab-group>

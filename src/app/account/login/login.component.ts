@@ -29,6 +29,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.roles = this.tokenStorage.getAuthorities();
+    if (this.roles.includes('ROLE_ADMIN')) {
+      this.router.navigate(['/admin']);
+    } else if (this.roles.includes('ROLE_PM_MK')) {
+      this.router.navigate(['/marketing']);
+    } else if (this.roles.includes('ROLE_PM_SALE')) {
+      this.router.navigate(['/sale']);
+    } else if (this.roles.includes('ROLE_MK')) {
+      this.router.navigate(['/marketing']);
+    } else if (this.roles.includes('ROLE_SALE')) {
+      this.router.navigate(['/sale']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   onSubmit($event: Event) {

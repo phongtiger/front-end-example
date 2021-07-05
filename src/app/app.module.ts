@@ -31,6 +31,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
+import { AdminComponent } from './admin/admin.component';
+import { LegendComponent } from './legend/legend.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {MatSortModule} from "@angular/material/sort";
     OrderComponent,
     OrderMarketingComponent,
     OrderSaleComponent,
+    AdminComponent,
+    LegendComponent,
   ],
   imports: [
     BrowserModule,

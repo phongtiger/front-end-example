@@ -23,6 +23,8 @@ import {ItemComponent} from '../item/item.component';
 import {OrderComponent} from '../order/order.component';
 import {OrderMarketingComponent} from "../order-marketing/order-marketing.component";
 import {OrderSaleComponent} from "../order-sale/order-sale.component";
+import {AdminComponent} from '../admin/admin.component';
+import {LegendComponent} from '../legend/legend.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -116,5 +118,13 @@ export const MaterialRoutes: Routes = [
   {
     path: 'sale',
     component: OrderSaleComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
+    path: 'legend',
+    component: LegendComponent
   }
 ];

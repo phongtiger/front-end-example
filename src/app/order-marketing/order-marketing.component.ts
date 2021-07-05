@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {PeriodicElement} from "../order/order.component";
 import {OrderServiceService} from "../services/order-service.service";
 import {tap} from "rxjs/operators";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-marketing',
@@ -27,11 +28,12 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
   private isLoginFailed: boolean | undefined;
   private isLoggedIn: boolean | undefined;
   length = 0;
-  pageSize: number = 2;
+  pageSize = 2;
 
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
-              private orderService: OrderServiceService) {
+              private orderService: OrderServiceService,
+              public snackBar: MatSnackBar) {
     this.activityData = activities;
     this.role = this.tokenStorage.getAuthorities();
     if (this.role.includes('ROLE_ADMIN')) {
@@ -62,14 +64,24 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
     };
     this.orderService.getOrderByMarketing(params).subscribe(
       data => {
-        console.log(data)
-        this.length = data.data.totalElements
-        console.log(data.data.totalElements)
-        this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+        console.log(data);
+        if (data != null && data.totalElements != null) {
+          this.length = data.data.totalElements;
+          this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+        } else {
+          this.snackBar.open('Success! But not found data in system CMS', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+        }
       }, error => {
-        console.log(error)
+        console.log(error);
+        this.snackBar.open('An error has occurred. Please try again', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
       }
-    )
+    );
   }
   changePage($event: any) {
 
@@ -82,13 +94,23 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
     };
     this.orderService.getOrderByMarketing(params).subscribe(
       data => {
-        console.log(data)
-        this.length = data.data.totalElements
-        console.log(data.data.totalElements)
-        this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+        console.log(data);
+        if (data != null && data.totalElements != null) {
+          this.length = data.data.totalElements;
+          this.dataSource = new MatTableDataSource<PeriodicElement>(data.data.content);
+        } else {
+          this.snackBar.open('Success! But not found data in system CMS', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+        }
       }, error => {
-        console.log(error)
+        console.log(error);
+        this.snackBar.open('An error has occurred. Please try again', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
       }
-    )
+    );
   }
 }

@@ -8,7 +8,9 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  {state: 'order', type: 'link', name: 'Đơn hàng', icon: 'view_comfy'},
+  {state: 'legend', type: 'link', name: 'Legend', icon: 'view_comfy'},
+  {state: 'marketing', type: 'link', name: 'Order Marketing', icon: 'view_comfy'},
+  {state: 'sale', type: 'link', name: 'Order Sale', icon: 'view_comfy'},
   {state: 'item', type: 'link', name: 'Mặt hàng', icon: 'view_comfy'},
   {state: 'category', type: 'link', name: 'Danh mục', icon: 'view_comfy'},
   {state: 'account', type: 'link', name: 'Account', icon: 'view_comfy'},
