@@ -45,7 +45,11 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
               private orderService: OrderServiceService,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private router: Router) {
+    if (this.tokenStorage.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
     this.role = this.tokenStorage.getAuthorities();
     if (this.role.includes('ROLE_ADMIN')) {
       this.nameRole = 'admin';

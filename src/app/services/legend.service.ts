@@ -17,4 +17,11 @@ export class LegendService {
   findAll(params: any): Observable<any> {
     return this.http.get(environment.url + '/legend', {headers: httpOptions.headers, params: params});
   }
+
+  create(body: any): Observable<any> {
+    return this.http.post(environment.url + '/legend', body,{headers: httpOptions.headers});
+  }
+  update(body: any): Observable<any> {
+    return this.http.put(environment.url + '/legend', body, {headers: httpOptions.headers});
+  }
 }

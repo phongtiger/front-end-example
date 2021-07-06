@@ -1,1 +1,437 @@
-<p>order-sale works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="cLevel">
+      <mat-header-cell *matHeaderCellDef> C LEVEL </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+          <mat-select [(value)]="element.cLevel" placeholder="c level">
+            <mat-option value="C0">C0</mat-option>
+            <mat-option value="C1">C1</mat-option>
+            <mat-option value="C2">C2</mat-option>
+            <mat-option value="C3">C3</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="callReason">
+      <mat-header-cell *matHeaderCellDef> CALL REASON </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+          <mat-select [(value)]="element.callReason">
+            <mat-option value="C0">C0</mat-option>
+            <mat-option value="C1">C1</mat-option>
+            <mat-option value="C2">C2</mat-option>
+            <mat-option value="C3">C3</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.id" disabled>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="staff">
+      <mat-header-cell *matHeaderCellDef> STAFF </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.staff">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="customer" sticky>
+      <mat-header-cell *matHeaderCellDef> CUSTOMER </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.customer" >
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="mobileNumber">
+      <mat-header-cell *matHeaderCellDef> MOBILE NUMBER </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.mobileNumber">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="item">
+      <mat-header-cell *matHeaderCellDef> ITEM </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.item">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="province">
+      <mat-header-cell *matHeaderCellDef> PROVINCE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.province">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="district">
+      <mat-header-cell *matHeaderCellDef> DISTRICT </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.district">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="subdistrict">
+      <mat-header-cell *matHeaderCellDef> BARANGAY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.subdistrict">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> ADDRESS </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.address">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="detail">
+      <mat-header-cell *matHeaderCellDef> DETAIL </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field >
+          <input matInput [value]="element.detail">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="marketer">
+      <mat-header-cell *matHeaderCellDef> MARKETER </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.marketer">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="statusDelivery">
+      <mat-header-cell *matHeaderCellDef> STATUS DELIVERY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.statusDelivery">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="courier">
+      <mat-header-cell *matHeaderCellDef> COURIER </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.courier">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="timestamp">
+      <mat-header-cell *matHeaderCellDef> TIMESTAMP </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.timestamp">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+          <input matInput placeholder="Symbol" [value]="element.status">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> PRICE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+          <input matInput placeholder="Symbol" [value]="element.price">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="chatPage">
+      <mat-header-cell *matHeaderCellDef> CHAT PAGE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.chatPage">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="qty1">
+      <mat-header-cell *matHeaderCellDef> QTY1 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.qty1">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="product1">
+      <mat-header-cell *matHeaderCellDef> PRODUCT1 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.product1">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="qty2">
+      <mat-header-cell *matHeaderCellDef> QTY2 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.qty2">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="product2">
+      <mat-header-cell *matHeaderCellDef> PRODUCT2 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.product2">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="qty3">
+      <mat-header-cell *matHeaderCellDef> QTY3 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.qty3">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="product3">
+      <mat-header-cell *matHeaderCellDef> PRODUCT3 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.product3">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="free">
+      <mat-header-cell *matHeaderCellDef> FREE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.free">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="freebieProduct">
+      <mat-header-cell *matHeaderCellDef> FREEBIE PRODUCT </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.freebieProduct">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="totalProductNames">
+      <mat-header-cell *matHeaderCellDef> TOTAL PRODUCT NAMES </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.totalProductNames">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="jntTotalProductTemplate">
+      <mat-header-cell *matHeaderCellDef> JNT TOTAL PRODUCT TEMPLATE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.jntTotalProductTemplate">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="jntProductCodeFormula">
+      <mat-header-cell *matHeaderCellDef> JNT PRODUCT CODE FORMULA </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.jntProductCodeFormula">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="setSale">
+      <mat-header-cell *matHeaderCellDef> SET </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.setSale" >
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="qty">
+      <mat-header-cell *matHeaderCellDef> QTY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.qty">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="bexProCode">
+      <mat-header-cell *matHeaderCellDef> BEX PRO CODE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.bexProCode">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="brgyCityProvince">
+      <mat-header-cell *matHeaderCellDef> BRGY CITY PROVINCE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.brgyCityProvince">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="addcheck">
+      <mat-header-cell *matHeaderCellDef> ADD CHECK </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.addcheck">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="odzjnt">
+      <mat-header-cell *matHeaderCellDef> ODZ JNT </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.odzjnt">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="odzninja">
+      <mat-header-cell *matHeaderCellDef> ODZ NINJA </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.odzninja">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="odzbyaheros">
+      <mat-header-cell *matHeaderCellDef> ODZ BYAHEROS </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.odzbyaheros">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="odzgogo">
+      <mat-header-cell *matHeaderCellDef> ODZ GOGO </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.odzgogo">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="odzlbc">
+      <mat-header-cell *matHeaderCellDef> ODZ LBC </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.odzlbc">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="datenum">
+      <mat-header-cell *matHeaderCellDef> DATE NUM </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.datenum">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="jt">
+      <mat-header-cell *matHeaderCellDef> JT </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.jt">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="ninja">
+      <mat-header-cell *matHeaderCellDef> NINJA </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.ninja">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="byaheros">
+      <mat-header-cell *matHeaderCellDef> BYAHEROS </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.byaheros">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="ax">
+      <mat-header-cell *matHeaderCellDef> AX </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.ax">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="ay">
+      <mat-header-cell *matHeaderCellDef> AY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.ay">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="courierAZ">
+      <mat-header-cell *matHeaderCellDef> COURIER AZ </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.courierAZ">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="bexProvince">
+      <mat-header-cell *matHeaderCellDef> BEX PROVINCE </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.bexProvince">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="bexCity">
+      <mat-header-cell *matHeaderCellDef> BEX CITY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.bexCity">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="bexBrgy">
+      <mat-header-cell *matHeaderCellDef> BEX BRGY </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.bexBrgy">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container><!-- Symbol Column -->
+    <ng-container matColumnDef="bexPouches">
+      <mat-header-cell *matHeaderCellDef> BEX POUCHES </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input matInput [value]="element.bexPouches">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Fav Column -->
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

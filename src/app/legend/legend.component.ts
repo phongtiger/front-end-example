@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {tap} from "rxjs/operators";
 import {LegendService} from "../services/legend.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 class PeriodicElement {
   id: '';
@@ -50,10 +51,16 @@ export class LegendComponent implements OnInit, AfterViewInit {
     freebies: new FormControl(''),
     specialPromos: new FormControl('')
   });
+  openedCreate = false;
   constructor(private authService: AuthService,
               public tokenStorage: TokenStorageService,
               private legendService: LegendService,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private router: Router
+              ) {
+    if (this.tokenStorage.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
     this.activityData = activities;
     this.role = this.tokenStorage.getAuthorities();
     if (this.role.includes('ROLE_ADMIN')) {
@@ -135,6 +142,50 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
 
   save($event: MouseEvent) {
+    this.legendService.create(this.legendForm.value).subscribe(
+      data => {
+        this.snackBar.open('Success create legend', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-primary']
+        });
+      }, error => {
+        this.snackBar.open(error.error.message, 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
+      }
+    )
+  }
 
+  openCreate() {
+    this.openedCreate = true
+  }
+
+  closeTab($event: MouseEvent) {
+    this.openedCreate = false
+    const params = {
+      page: this.page,
+      size: this.pageSize
+    };
+    this.legendService.findAll(params).subscribe(
+      data => {
+        console.log(data);
+        if (data != null && data.totalElements != null) {
+          this.length = data.totalElements;
+          this.dataSource = new MatTableDataSource<PeriodicElement>(data.content);
+        } else {
+          this.snackBar.open('Success! But not found data in system CMS', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+        }
+      }, error => {
+        console.log(error);
+        this.snackBar.open('An error has occurred. Please try again', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
+      }
+    );
   }
 }

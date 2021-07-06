@@ -30,6 +30,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import { AdminComponent } from './admin/admin.component';
 import { LegendComponent } from './legend/legend.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LegendComponent } from './legend/legend.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
   ],
   providers: [
     {

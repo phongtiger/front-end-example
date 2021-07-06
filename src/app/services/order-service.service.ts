@@ -17,4 +17,7 @@ export class OrderServiceService {
   getOrderByMarketing(params: any): Observable<any> {
     return this.http.get(environment.url + '/orders/marketing', {headers: httpOptions.headers, params: params});
   }
+  getOrderBySale(params: any): Observable<any> {
+    return this.http.get(environment.url + '/orders/sale', {headers: httpOptions.headers, params: params});
+  }
 }
