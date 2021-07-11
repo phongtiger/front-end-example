@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutAlign="space-around stretch" >
+  <div><button mat-raised-button color="primary">
+    Permission : {{nameRole}}
+  </button></div>
+  <div mat-card>
+
+  </div>
+</div>
+<div>
+  <mat-card fxLayout="row" fxLayoutAlign="space-around stretch" >
+    <form class="example-form" fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field>
+        <input matInput style="margin-left: 5px"
+               type="text"
+               placeholder="Enter produce name"
+               [formControl]="myControl">
+      </mat-form-field>
+      <button style="margin-left: 5px" mat-raised-button color="primary"  aria-label="Add" (click)="generateCode()">
+        <mat-icon>create</mat-icon>
+      </button>
+    </form>
+  </mat-card>
+  <mat-card fxLayout="row" fxLayoutAlign="space-around stretch">
+    <code>{{code}}</code>
+  </mat-card>
+</div>

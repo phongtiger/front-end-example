@@ -1,6 +1,71 @@
-<mat-chip-list>
-  <mat-chip color="primary" selected="true">Permission : {{nameRole}}</mat-chip>
-</mat-chip-list>
+<div fxLayout="row" fxLayoutAlign="space-around stretch" >
+  <div><button mat-raised-button color="primary">
+    Permission : {{nameRole}}
+  </button></div>
+  <div>
+    <form class="example-form" fxLayout="row" fxLayoutAlign="start center" style="background-color: #26c6da; border-radius: 5px;">
+      <input style="margin-left: 5px" matInput
+             type="text"
+             placeholder="Add name sale"
+             [matAutocomplete]="auto"
+             [formControl]="myControl">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+      <button style="margin-left: 5px" mat-raised-button color="primary"  aria-label="Add" (click)="addSaleFunction()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<form class="mat-card" style="margin-top: 10px; " [formGroup]="searchForm">
+  <div fxLayout="row" fxLayoutAlign="space-around center"  style="height: 65px; margin: 10px;">
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="NO COPY" formControlName="note">
+          <mat-option value="">All</mat-option>
+          <mat-option value="1">NO COPY</mat-option>
+          <mat-option value="2">HAS COPY</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="C LEVEL" formControlName="cLevel">
+          <mat-option value="">All</mat-option>
+          <mat-option value="C0">C0</mat-option>
+          <mat-option value="C1">C1</mat-option>
+          <mat-option value="C2">C2</mat-option>
+          <mat-option value="C3">C3</mat-option>
+          <mat-option value="C4">C4</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div >
+      <mat-form-field style="margin: 10px">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date" formControlName="fromDate">
+          <input matEndDate formControlName="end" placeholder="End date" formControlName="toDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+    </div>
+    <div><button mat-raised-button color="primary" (click)="search()">
+      Tìm kiếm
+      <mat-icon>search</mat-icon>
+    </button></div>
+  </div>
+</form>
+
+
 
 <div style="margin-top: 20px">
   <table class="example-table mat-elevation-z8 mat-table" mat-table recycleRows [dataSource]="dataSource">
@@ -10,69 +75,69 @@
 <!--    </ng-container>-->
     <!-- Name Column -->
     <ng-container matColumnDef="createDate" sticky>
-      <th mat-header-cell *matHeaderCellDef> CreateDate</th>
-      <td mat-cell *matCellDef="let element"> {{element.createDate | date :'short'}} </td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> CreateDate</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.createDate | date :'short'}} </td>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="status" style="width:2rem">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.clever}} </td>
+    <ng-container matColumnDef="clevel" style="text-align: center">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> C LEVEL </th>
+      <td mat-cell *matCellDef="let element" style="text-align: center" [style.background-color]="element.clevel == 'C0'? 'orangered' : element.clevel == 'C1' ? 'yellow' : element.clevel == 'C2' ? 'lawngreen' : element.clevel == 'C3' ? 'cyan' : 'white'"> {{element.clevel}} </td>
     </ng-container><!-- Weight Column -->
 
     <ng-container matColumnDef="note">
-      <th mat-header-cell *matHeaderCellDef>Note</th>
-      <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center">Note</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.notes == "1" ? "NO COPY" : "HAS COPY"}} </td>
     </ng-container>
     <ng-container matColumnDef="assigned">
-      <th mat-header-cell *matHeaderCellDef>ASSIGNED</th>
-      <td mat-cell *matCellDef="let element"></td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center">ASSIGNED</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"></td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> FULL NAME</th>
-      <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> FULL NAME</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.name}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> PHONE NUMBER</th>
-      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> PHONE NUMBER</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.phoneNumber}}</td>
     </ng-container>
     <!-- Symbol Column -->
-    <ng-container matColumnDef="address" style="width: 400px">
-      <th mat-header-cell *matHeaderCellDef> ADDRESS</th>
-      <td mat-cell *matCellDef="let element"> {{element.address}}</td>
+    <ng-container matColumnDef="address" style="width: 7rem">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ADDRESS</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.address}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="province" style="width: 400px">
-      <th mat-header-cell *matHeaderCellDef> PROVINCE</th>
-      <td mat-cell *matCellDef="let element"> {{element.province}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> PROVINCE</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.province}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="district" style="width: 400px">
-      <th mat-header-cell *matHeaderCellDef> DISTRICT</th>
-      <td mat-cell *matCellDef="let element"> {{element.district}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> DISTRICT</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.district}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="barangay" style="width: 400px">
-      <th mat-header-cell *matHeaderCellDef> BARANGAY</th>
-      <td mat-cell *matCellDef="let element"> {{element.barangay}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> BARANGAY</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.barangay}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="produce" style="width: 400px">
-      <th mat-header-cell *matHeaderCellDef> PRODUCE</th>
-      <td mat-cell *matCellDef="let element"> {{element.produce}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> PRODUCE</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.produce}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="detail">
-      <th mat-header-cell *matHeaderCellDef> DETAIL</th>
-      <td mat-cell *matCellDef="let element"> {{element.detail}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> DETAIL</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.detail}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="marketer">
-      <th mat-header-cell *matHeaderCellDef> Marketer</th>
-      <td mat-cell *matCellDef="let element"> {{element.marketer}}</td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> Marketer</th>
+      <td mat-cell *matCellDef="let element" style="text-align: center"> {{element.marketer}}</td>
     </ng-container>
     <!-- Symbol Column -->
     <tr class="mat-row" *matNoDataRow>
@@ -82,9 +147,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [length]="length"
-                 [pageSizeOptions]="[5, 10, 25, 100]"
-                 [pageSize]="pageSize"
-                 (page)="changePage($event)">
+                 [pageSizeOptions]="[50, 100, 150, 200]"
+                 [pageSize]="pageSize">
   </mat-paginator>
 </div>
 

@@ -20,4 +20,8 @@ export class OrderServiceService {
   getOrderBySale(params: any): Observable<any> {
     return this.http.get(environment.url + '/orders/sale', {headers: httpOptions.headers, params: params});
   }
+  addSale(body: any): Observable<any> {
+    return this.http.post(environment.url + '/orders/add-sale', body, {headers: httpOptions.headers});
+  }
+
 }

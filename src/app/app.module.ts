@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {DatePipe, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -31,6 +31,8 @@ import {MatSortModule} from "@angular/material/sort";
 import { AdminComponent } from './admin/admin.component';
 import { LegendComponent } from './legend/legend.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { GenerateCodeComponent } from './generate-code/generate-code.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     OrderSaleComponent,
     AdminComponent,
     LegendComponent,
+    GenerateCodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,13 +66,15 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatSortModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatAutocompleteModule
   ],
   providers: [
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     },
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
