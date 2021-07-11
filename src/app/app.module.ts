@@ -33,6 +33,7 @@ import { LegendComponent } from './legend/legend.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { GenerateCodeComponent } from './generate-code/generate-code.component';
+import { EditOrderComponent } from './edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { GenerateCodeComponent } from './generate-code/generate-code.component';
     AdminComponent,
     LegendComponent,
     GenerateCodeComponent,
+    EditOrderComponent,
   ],
   imports: [
     BrowserModule,

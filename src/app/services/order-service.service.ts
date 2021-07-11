@@ -23,5 +23,8 @@ export class OrderServiceService {
   addSale(body: any): Observable<any> {
     return this.http.post(environment.url + '/orders/add-sale', body, {headers: httpOptions.headers});
   }
+  findOne(id: string): Observable<any> {
+    return this.http.get(environment.url + '/orders/'+ id,{headers: httpOptions.headers});
+  }
 
 }

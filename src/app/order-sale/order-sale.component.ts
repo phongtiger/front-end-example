@@ -20,7 +20,6 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     'callReason',
     'id',
     'staff',
-    'tool',
     'customer',
     'mobileNumber',
     'item',
@@ -60,7 +59,8 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     'gogoCod',
     'lbcCod',
     'bexBrgy',
-    'bexPouches'];
+    'bexPouches'
+  ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   private page = 0;
@@ -148,6 +148,10 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
   }
 
   saveOne(id: number) {
+  }
+
+  editOrder(id : number) {
+    this.router.navigate(['/editorder/' + id ])
   }
 }
 

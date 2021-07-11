@@ -23,6 +23,7 @@ import {OrderSaleComponent} from "../order-sale/order-sale.component";
 import {AdminComponent} from '../admin/admin.component';
 import {LegendComponent} from '../legend/legend.component';
 import {GenerateCodeComponent} from "../generate-code/generate-code.component";
+import {EditOrderComponent} from "../edit-order/edit-order.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -116,5 +117,9 @@ export const MaterialRoutes: Routes = [
   {
     path: 'code',
     component: GenerateCodeComponent
+  },
+  {
+    path: 'editorder/:id',
+    component: EditOrderComponent
   }
 ];
