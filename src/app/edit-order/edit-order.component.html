@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-  <form [formGroup]="options">
+  <form [formGroup]="fromGroup">
     <div  fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
         <mat-label>C LEVEL</mat-label>
@@ -88,6 +88,10 @@
         <mat-label>DETAIL</mat-label>
         <input matInput formControlName="detail" type="text">
       </mat-form-field >
+      <mat-form-field appearance="fill">
+        <mat-label>ADDRESS JNT</mat-label>
+        <input matInput formControlName="addressJnt" type="text">
+      </mat-form-field >
     </div>
     <div  fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
@@ -111,217 +115,137 @@
         <input matInput formControlName="price" type="text">
       </mat-form-field >
     </div>
-    <div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+      <mat-form-field appearance="fill">
+        <mat-label>QT1</mat-label>
+        <input matInput formControlName="qty1" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>PRODUCT1</mat-label>
+        <input matInput formControlName="product1" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>QT2</mat-label>
+        <input matInput formControlName="qty2" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>PRODUCT2</mat-label>
+        <input matInput formControlName="product2" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>QT3</mat-label>
+        <input matInput formControlName="qty3" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>PRODUCT3</mat-label>
+        <input matInput formControlName="product3" type="text">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
         <mat-label>CHAT PAGE</mat-label>
         <input matInput formControlName="chatPage" type="text">
       </mat-form-field>
+
       <mat-form-field appearance="fill">
-        <mat-label>ADDRESS JNT</mat-label>
-        <input matInput >
-      </mat-form-field >
+        <mat-label>FREE</mat-label>
+        <input matInput formControlName="free" type="text">
+      </mat-form-field>
+
       <mat-form-field appearance="fill">
-        <mat-label>Both a label and a placeholder</mat-label>
-        <input matInput>
+        <mat-label>FREEBIE PRODUCT</mat-label>
+        <input matInput formControlName="freebieProduct" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>SET</mat-label>
+        <input matInput formControlName="setSale" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>QTY</mat-label>
+        <input matInput formControlName="qty" type="text">
+      </mat-form-field>
+
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>TOTAL PRODUCT NAMES</mat-label>
+        <input matInput formControlName="totalProductNames" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>JNT TOTAL PRODUCT TEMPLATE</mat-label>
+        <input matInput formControlName="jntTotalProductTemplate" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>JNT PRODUCT CODE FORMULA</mat-label>
+        <input matInput formControlName="jntProductCodeFormula" type="text">
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field appearance="fill">
+        <mat-label>BEXPROCODE</mat-label>
+        <input matInput formControlName="bexProCode" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>BRGY CITY PROVINCE</mat-label>
+        <input matInput formControlName="brgyCityProvince" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>ADD CHECK</mat-label>
+        <input matInput formControlName="addcheck" type="text">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field appearance="fill">
+        <mat-label>ODZ BYAHEROS</mat-label>
+        <mat-icon *ngIf="data.odzbyaheros === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.odzbyaheros === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>JNT COD</mat-label>
+        <mat-icon *ngIf="data.jntCod === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.jntCod === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>NINJACOD</mat-label>
+        <mat-icon *ngIf="data.ninjaCod === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.ninjaCod === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>BEXCODE</mat-label>
+        <mat-icon *ngIf="data.bexCod === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.bexCod === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>GOGOCOD</mat-label>
+        <mat-icon *ngIf="data.gogoCod === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.gogoCod === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>LBCCOD</mat-label>
+        <mat-icon *ngIf="data.lbcCod === '1'" style="background-color: green">check</mat-icon>
+        <mat-icon *ngIf="data.lbcCod === '0'" style="background-color: red">check</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>BEX BRGY</mat-label>
+        <input matInput formControlName="bexBrgy" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>BEX POUCHES</mat-label>
+        <input matInput formControlName="bexPouches" type="text">
       </mat-form-field>
     </div>
   </form>
   </mat-card-content>
 </mat-card>
-
-    <ng-container matColumnDef="addressJnt">
-      <mat-header-cell *matHeaderCellDef> ADDRESS JNT </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.addressJnt">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="qty1">
-      <mat-header-cell *matHeaderCellDef> QTY1 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.qty1">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="product1">
-      <mat-header-cell *matHeaderCellDef> PRODUCT1 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.product1">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="qty2">
-      <mat-header-cell *matHeaderCellDef> QTY2 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.qty2">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="product2">
-      <mat-header-cell *matHeaderCellDef> PRODUCT2 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.product2">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="qty3">
-      <mat-header-cell *matHeaderCellDef> QTY3 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.qty3">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="product3">
-      <mat-header-cell *matHeaderCellDef> PRODUCT3 </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.product3">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="free">
-      <mat-header-cell *matHeaderCellDef> FREE </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.free">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="freebieProduct">
-      <mat-header-cell *matHeaderCellDef> FREEBIE PRODUCT </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.freebieProduct">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="totalProductNames">
-      <mat-header-cell *matHeaderCellDef> TOTAL PRODUCT NAMES </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.totalProductNames">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="jntTotalProductTemplate">
-      <mat-header-cell *matHeaderCellDef> JNT TOTAL PRODUCT TEMPLATE </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.jntTotalProductTemplate">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="jntProductCodeFormula">
-      <mat-header-cell *matHeaderCellDef> JNT PRODUCT CODE FORMULA </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.jntProductCodeFormula">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="setSale">
-      <mat-header-cell *matHeaderCellDef> SET </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.setSale" >
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="qty">
-      <mat-header-cell *matHeaderCellDef> QTY </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.qty">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="bexProCode">
-      <mat-header-cell *matHeaderCellDef> BEX PRO CODE </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.bexProCode">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="brgyCityProvince">
-      <mat-header-cell *matHeaderCellDef> BRGY CITY PROVINCE </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.brgyCityProvince">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="addcheck">
-      <mat-header-cell *matHeaderCellDef> ADD CHECK </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.addcheck">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="odzbyaheros">
-      <mat-header-cell *matHeaderCellDef> ODZ BYAHEROS </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.odzbyaheros === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.odzbyaheros === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="jntCod">
-      <mat-header-cell *matHeaderCellDef> JNT COD </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.jntCod === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.jntCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container>
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="ninjaCod">
-      <mat-header-cell *matHeaderCellDef> NINJA COD</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.ninjaCod === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.ninjaCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="bexCod">
-      <mat-header-cell *matHeaderCellDef> BEX COD </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.bexCod === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.bexCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="gogoCod">
-      <mat-header-cell *matHeaderCellDef> ODZ GOGO </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.gogoCod === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.gogoCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="lbcCod">
-      <mat-header-cell *matHeaderCellDef> ODZ LBC </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.lbcCod === '1'" style="background-color: green">check</mat-icon>
-          <mat-icon *ngIf="element.lbcCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-
-    <ng-container matColumnDef="bexBrgy">
-      <mat-header-cell *matHeaderCellDef> BEX BRGY </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.bexBrgy">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container><!-- Symbol Column -->
-    <ng-container matColumnDef="bexPouches">
-      <mat-header-cell *matHeaderCellDef> BEX POUCHES </mat-header-cell>
-      <mat-cell *matCellDef="let element ; let i = index;">
-        <mat-form-field>
-          <input matInput [value]="element.bexPouches">
-        </mat-form-field>
-      </mat-cell>
-    </ng-container>

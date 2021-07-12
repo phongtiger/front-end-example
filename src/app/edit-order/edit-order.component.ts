@@ -4,6 +4,7 @@ import {OrderServiceService} from "../services/order-service.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-order',
@@ -11,7 +12,53 @@ import {TokenStorageService} from "../auth/token-storage.service";
   styleUrls: ['./edit-order.component.css']
 })
 export class EditOrderComponent implements OnInit {
-  options: any;
+  fromGroup = new FormGroup({
+    clevel:  new FormControl(),
+    callReason:  new FormControl(),
+    id:  new FormControl(),
+    staff:  new FormControl(),
+    customer:  new FormControl(),
+    mobileNumber:  new FormControl(),
+    item:  new FormControl(),
+    province:  new FormControl(),
+    district:  new FormControl(),
+    subdistrict:  new FormControl(),
+    address:  new FormControl(),
+    detail:  new FormControl(),
+    marketer:  new FormControl(),
+    statusDelivery:  new FormControl(),
+    courier:  new FormControl(),
+    timestamp:  new FormControl(),
+    price:  new FormControl(),
+    chatPage:  new FormControl(),
+    addressJnt:  new FormControl(),
+    qty1:  new FormControl(),
+    product1:  new FormControl(),
+    qty2:  new FormControl(),
+    product2:  new FormControl(),
+    qty3:  new FormControl(),
+    product3:  new FormControl(),
+    free:  new FormControl(),
+    freebieProduct:  new FormControl(),
+    totalProductNames:  new FormControl(),
+    jntTotalProductTemplate:  new FormControl(),
+    jntProductCodeFormula:  new FormControl(),
+    setSale:  new FormControl(),
+    qty:  new FormControl(),
+    bexProCode:  new FormControl(),
+    brgyCityProvince:  new FormControl(),
+    addcheck:  new FormControl(),
+
+    odzbyaheros:  new FormControl(),
+    jntCod:  new FormControl(),
+    ninjaCod:  new FormControl(),
+    bexCod:  new FormControl(),
+    gogoCod:  new FormControl(),
+    lbcCod:  new FormControl(),
+    bexBrgy:  new FormControl(),
+    bexPouches:  new FormControl()
+  });
+  data: any;
 
   constructor(private route: ActivatedRoute,
               private orderService: OrderServiceService,
