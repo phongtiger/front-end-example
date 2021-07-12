@@ -31,6 +31,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
+import {EditOrderComponent} from "../edit-order/edit-order.component";
 
 @NgModule({
   imports: [
@@ -62,7 +63,7 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
     TooltipComponent,
     SnackbarComponent,
     SliderComponent,
-    SlideToggleComponent
+    SlideToggleComponent,
   ]
 })
 export class MaterialComponentsModule {}

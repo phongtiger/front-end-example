@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
+import {EditOrderComponent} from "./edit-order/edit-order.component";
 
 export const AppRoutes: Routes = [
   {

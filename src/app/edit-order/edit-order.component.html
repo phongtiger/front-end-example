@@ -2,15 +2,10 @@
   <mat-card-content>
   <form [formGroup]="fromGroup">
     <div  fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>C LEVEL</mat-label>
         <mat-select
           formControlName="clevel">
-<!--          [style.background-color]="element.clevel == 'C0'? 'orangered' -->
-<!--          : element.clevel == 'C1' ? 'yellow' -->
-<!--          : element.clevel == 'C2' ? 'lawngreen' -->
-<!--          : element.clevel == 'C3' ? 'cyan' : 'white'"-->
-
           <mat-option value="C0" style="background-color: orangered">C0</mat-option>
           <mat-option value="C1" style="background-color: yellow">C1</mat-option>
           <mat-option value="C2" style="background-color: lawngreen">C2</mat-option>
@@ -44,28 +39,28 @@
           <mat-option value="21" style="background-color: cyan">Area Lockdown</mat-option>
           <mat-option value="22" style="background-color: cyan">For Address Checking</mat-option>
         </mat-select>      </mat-form-field >
-      <mat-form-field appearance="fill">
-        <mat-label>Id</mat-label>
-        <input matInput formControlName="id"
-                disabled>      </mat-form-field>
-      <mat-form-field appearance="fill">
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Id</mat-label>-->
+<!--        <input matInput formControlName="id"-->
+<!--                disabled>      </mat-form-field>-->
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>STAFF</mat-label>
-        <input matInput formControlName="staff" type="text">
+        <input matInput formControlName="staff" type="text" disabled>
       </mat-form-field >
       <mat-form-field appearance="fill">
         <mat-label>Customer</mat-label>
         <input matInput  formControlName="customer" type="text">
       </mat-form-field>
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
         <mat-label>MOBILE NUMBER</mat-label>
         <input matInput formControlName="mobileNumber" type="text">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>PRODUCE</mat-label>
-        <input matInput formControlName="produce" type="text">
+        <input matInput formControlName="item" type="text">
       </mat-form-field >
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
         <mat-label>PROVINCE</mat-label>
         <input matInput formControlName="province" type="text">
@@ -78,25 +73,9 @@
         <mat-label>Barangay</mat-label>
         <input matInput formControlName="subdistrict" type="text">
       </mat-form-field>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="space-around none" >
-      <mat-form-field appearance="fill">
-        <mat-label>ADDRESS</mat-label>
-        <input matInput formControlName="address" type="text">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>DETAIL</mat-label>
-        <input matInput formControlName="detail" type="text">
-      </mat-form-field >
-      <mat-form-field appearance="fill">
-        <mat-label>ADDRESS JNT</mat-label>
-        <input matInput formControlName="addressJnt" type="text">
-      </mat-form-field >
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="12" appearance="fill">
         <mat-label>MARKETER</mat-label>
-        <input matInput formControlName="marketer" type="text">
+        <input matInput formControlName="marketer" type="text" disabled>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>STATUS DELIVERY</mat-label>
@@ -106,18 +85,27 @@
         <mat-label>COURIER</mat-label>
         <input matInput formControlName="courier" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>CREATE DATE</mat-label>
-        <input matInput formControlName="timestamp" type="date">
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex="50" appearance="fill">
+        <mat-label>ADDRESS</mat-label>
+        <input matInput formControlName="address" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="50" appearance="fill">
+        <mat-label>DETAIL</mat-label>
+        <input matInput formControlName="detail" type="text">
+      </mat-form-field >
+    </div>
+    <div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>PRICE</mat-label>
         <input matInput formControlName="price" type="text">
       </mat-form-field >
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>QT1</mat-label>
         <input matInput formControlName="qty1" type="text">
       </mat-form-field>
@@ -127,7 +115,7 @@
         <input matInput formControlName="product1" type="text">
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>QT2</mat-label>
         <input matInput formControlName="qty2" type="text">
       </mat-form-field>
@@ -136,8 +124,7 @@
         <mat-label>PRODUCT2</mat-label>
         <input matInput formControlName="product2" type="text">
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>QT3</mat-label>
         <input matInput formControlName="qty3" type="text">
       </mat-form-field>
@@ -146,8 +133,10 @@
         <mat-label>PRODUCT3</mat-label>
         <input matInput formControlName="product3" type="text">
       </mat-form-field>
+
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
+
       <mat-form-field appearance="fill">
         <mat-label>CHAT PAGE</mat-label>
         <input matInput formControlName="chatPage" type="text">
@@ -168,26 +157,31 @@
         <input matInput formControlName="setSale" type="text">
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>QTY</mat-label>
         <input matInput formControlName="qty" type="text">
       </mat-form-field>
 
     </div>
-    <div>
-      <mat-form-field appearance="fill">
+    <div fxLayout="row">
+      <mat-form-field fxFlex="50" appearance="fill">
+        <mat-label>ADDRESS JNT</mat-label>
+        <input matInput formControlName="addressJnt" type="text">
+      </mat-form-field >
+      <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>TOTAL PRODUCT NAMES</mat-label>
         <input matInput formControlName="totalProductNames" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>JNT TOTAL PRODUCT TEMPLATE</mat-label>
         <input matInput formControlName="jntTotalProductTemplate" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>JNT PRODUCT CODE FORMULA</mat-label>
         <input matInput formControlName="jntProductCodeFormula" type="text">
       </mat-form-field>
-
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
@@ -204,39 +198,39 @@
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field appearance="fill">
+      <mat-card>
         <mat-label>ODZ BYAHEROS</mat-label>
         <mat-icon *ngIf="data.odzbyaheros === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.odzbyaheros === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
+      </mat-card>
+      <mat-card>
         <mat-label>JNT COD</mat-label>
         <mat-icon *ngIf="data.jntCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.jntCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
+      </mat-card>
+      <mat-card>
         <mat-label>NINJACOD</mat-label>
         <mat-icon *ngIf="data.ninjaCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.ninjaCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
+      </mat-card>
+      <mat-card>
         <mat-label>BEXCODE</mat-label>
         <mat-icon *ngIf="data.bexCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.bexCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
+      </mat-card>
+      <mat-card>
         <mat-label>GOGOCOD</mat-label>
         <mat-icon *ngIf="data.gogoCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.gogoCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
+      </mat-card>
+      <mat-card>
         <mat-label>LBCCOD</mat-label>
         <mat-icon *ngIf="data.lbcCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.lbcCod === '0'" style="background-color: red">check</mat-icon>
-      </mat-form-field>
+      </mat-card>
     </div>
 
-    <div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <mat-form-field appearance="fill">
         <mat-label>BEX BRGY</mat-label>
         <input matInput formControlName="bexBrgy" type="text">
@@ -245,6 +239,9 @@
         <mat-label>BEX POUCHES</mat-label>
         <input matInput formControlName="bexPouches" type="text">
       </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center stretch" >
+      <button mat-raised-button color="primary" type="submit" (click)="save($event)">SAVE</button>
     </div>
   </form>
   </mat-card-content>
