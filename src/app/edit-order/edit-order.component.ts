@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {OrderServiceService} from "../services/order-service.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {AuthService} from "../auth/auth.service";
-import {TokenStorageService} from "../auth/token-storage.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {OrderServiceService} from '../services/order-service.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AuthService} from '../auth/auth.service';
+import {TokenStorageService} from '../auth/token-storage.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Element} from "../order-sale/order-sale.component";
 
@@ -34,17 +34,17 @@ export class EditOrderComponent implements OnInit {
               private router: Router,
               ) {
     this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.orderService.findOne(params['id']).subscribe(
+      if (params.id) {
+        this.orderService.findOne(params.id).subscribe(
           data => {
             console.log(data);
             if (data) {
               this.data = data.data;
-              this.fromGroup.patchValue(this.data)
+              this.fromGroup.patchValue(this.data);
             }
           }, error => {
             console.log(error);
-            this.snackBar.open('An error has occurred. Please try again', 'Close', {
+            this.snackBar.open(error.error.message, 'Close', {
               duration: 8000,
               panelClass: ['mat-toolbar', 'mat-warn']
             });
@@ -105,8 +105,21 @@ export class EditOrderComponent implements OnInit {
 
   }
 
-  save($event: MouseEvent) {
-    console.log(this.fromGroup.value)
-    this.orderService.findOne
+  save() {
+    console.log(this.fromGroup.value.callReason);
+    this.orderService.saveOne(this.fromGroup.value).subscribe(
+      data => {
+      console.log(data);
+      if (data) {
+        this.data = data.data;
+        this.fromGroup.patchValue(this.data);
+      }
+    }, error => {
+      console.log(error);
+      this.snackBar.open(error.error.message, 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+    });
   }
 }
