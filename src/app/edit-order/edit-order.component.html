@@ -179,11 +179,10 @@
         <input matInput
                type="text"
                [matAutocomplete]="auto"
-               [formControl]="myControl"
                formControlName="jntTotalProductTemplate">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-autocomplete #auto="matAutocomplete" >
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.productDescription}}
+            {{option}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

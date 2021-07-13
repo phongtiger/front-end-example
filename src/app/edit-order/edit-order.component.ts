@@ -7,7 +7,7 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {LegendService} from '../services/legend.service';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, map, startWith, tap} from 'rxjs/operators';
 import {User} from '../order-marketing/order-marketing.component';
 export class Legend {
   id = '';
@@ -31,6 +31,7 @@ export class Legend {
 export class EditOrderComponent implements OnInit {
   fromGroup: any;
   data: {
+    jntTotalProductTemplate: string;
     timestamp: string ;
     bexCod: string; gogoCod: string; lbcCod: string; ninjaCod: string; jntCod: string; odzbyaheros: string } = {
     odzbyaheros: '',
@@ -39,10 +40,11 @@ export class EditOrderComponent implements OnInit {
     bexCod: '',
     gogoCod: '',
     lbcCod: '',
-    timestamp: ''
+    timestamp: '',
+    jntTotalProductTemplate: ''
   };
-  filteredOptions: Observable<Legend[]>;
-  private options: Legend[];
+  filteredOptions: Observable<string[]>;
+  public options: string[] = [];
   myControl = new FormControl();
 
   constructor(private route: ActivatedRoute,
@@ -61,6 +63,7 @@ export class EditOrderComponent implements OnInit {
             if (data) {
               this.data = data.data;
               this.fromGroup.patchValue(this.data);
+              this.myControl.patchValue(this.data.jntTotalProductTemplate);
             }
           }, error => {
             console.log(error);
@@ -123,17 +126,13 @@ export class EditOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.legendService.findAll().subscribe(
-      data => {
-        console.log(data);
-        if (data) {
-          this.myControl.patchValue(data.productDescription);
-        } else {
-          this.snackBar.open('Success! But not found data in system CMS', 'Close', {
-            duration: 8000,
-            panelClass: ['mat-toolbar', 'mat-primary']
-          });
-        }
-      }, error => {
+        data => {
+          this.options = [];
+          for (let i = 0; i < data.length; i++) {
+            this.options.push(data[i].productDescription);
+          }
+          console.log(this.options)
+        }, error => {
         console.log(error);
         this.snackBar.open('An error has occurred. Please try again', 'Close', {
           duration: 8000,
@@ -141,16 +140,21 @@ export class EditOrderComponent implements OnInit {
         });
       }
     );
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.fromGroup.controls['jntTotalProductTemplate'].valueChanges.pipe(
+        debounceTime(300),
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.productDescription),
-        map(productDescription => productDescription ? this._filter(productDescription) : this.options)
-      );
+        map((value : any) => this._filter(value))
+    );
   }
 
-  private _filter(productDescription: string): Legend[] {
-    const filterValue = productDescription.toLowerCase();
-    return this.options.filter(option => option.productDescription.toLowerCase().includes(filterValue));
+  private _filter(value: any): string[] {
+    // if (value) {
+    //   return this.options.filter(option => option.toLowerCase().includes(value.toLowerCase()));
+    // }
+    // return [];
+
+    return !!value ? this.options.filter(option => option.toLowerCase().includes(value.toLowerCase())) : [];
+
   }
 
   displayFn(legend?: Legend): string | undefined {
