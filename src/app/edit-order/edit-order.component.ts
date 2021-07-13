@@ -111,6 +111,10 @@ export class EditOrderComponent implements OnInit {
       data => {
       console.log(data);
       if (data) {
+        this.snackBar.open('Save success', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-primary']
+        });
         this.data = data.data;
         this.fromGroup.patchValue(this.data);
       }
