@@ -5,7 +5,23 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../auth/auth.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Element} from "../order-sale/order-sale.component";
+import {Observable} from 'rxjs';
+import {LegendService} from '../services/legend.service';
+import {map, startWith} from 'rxjs/operators';
+import {User} from '../order-marketing/order-marketing.component';
+export class Legend {
+  id = '';
+  productDescription = '';
+  len = '';
+  product = '';
+  colorSizeModel = '';
+  code = '';
+  setSale = '';
+  ivnCode = '';
+  freebies = '';
+  specialPromos = '';
+
+}
 
 @Component({
   selector: 'app-edit-order',
@@ -25,6 +41,9 @@ export class EditOrderComponent implements OnInit {
     lbcCod: '',
     timestamp: ''
   };
+  filteredOptions: Observable<Legend[]>;
+  private options: Legend[];
+  myControl = new FormControl();
 
   constructor(private route: ActivatedRoute,
               private orderService: OrderServiceService,
@@ -32,6 +51,7 @@ export class EditOrderComponent implements OnInit {
               private authService: AuthService,
               public tokenStorage: TokenStorageService,
               private router: Router,
+              private legendService: LegendService
               ) {
     this.route.params.subscribe(params => {
       if (params.id) {
@@ -102,7 +122,39 @@ export class EditOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.legendService.findAll().subscribe(
+      data => {
+        console.log(data);
+        if (data) {
+          this.myControl.patchValue(data.productDescription);
+        } else {
+          this.snackBar.open('Success! But not found data in system CMS', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+        }
+      }, error => {
+        console.log(error);
+        this.snackBar.open('An error has occurred. Please try again', 'Close', {
+          duration: 8000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
+      }
+    );
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.productDescription),
+        map(productDescription => productDescription ? this._filter(productDescription) : this.options)
+      );
+  }
 
+  private _filter(productDescription: string): Legend[] {
+    const filterValue = productDescription.toLowerCase();
+    return this.options.filter(option => option.productDescription.toLowerCase().includes(filterValue));
+  }
+
+  displayFn(legend?: Legend): string | undefined {
+    return legend ? legend.productDescription : undefined;
   }
 
   save() {

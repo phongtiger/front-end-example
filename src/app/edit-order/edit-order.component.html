@@ -176,7 +176,16 @@
     <div fxLayout="row">
       <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>JNT TOTAL PRODUCT TEMPLATE</mat-label>
-        <input matInput formControlName="jntTotalProductTemplate" type="text">
+        <input matInput
+               type="text"
+               [matAutocomplete]="auto"
+               [formControl]="myControl"
+               formControlName="jntTotalProductTemplate">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.productDescription}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>JNT PRODUCT CODE FORMULA</mat-label>

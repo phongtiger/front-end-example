@@ -53,17 +53,17 @@
 
   <ng-container matColumnDef="clevel" style="text-align: center">
     <th mat-header-cell *matHeaderCellDef style="text-align: center"> C LEVEL </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center"
+    <td (click)="editOrder(element.id)" mat-cell *matCellDef="let element" style="text-align: center"
         [style.background-color]="element.clevel == 'C0'? 'orangered'
         : element.clevel == 'C1' ? 'yellow'
         : element.clevel == 'C2' ? 'lawngreen'
         : element.clevel == 'C3' ? 'cyan'
-        : 'white'"><a (click)="editOrder(element.id)">{{element.clevel}}</a> </td>
+        : 'white'">{{element.clevel}}</td>
   </ng-container>
 
   <ng-container matColumnDef="callReason" style="text-align: center">
     <th mat-header-cell *matHeaderCellDef style="text-align: center"> CALL REASON </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center"
+    <td (click)="editOrder(element.id)" mat-cell *matCellDef="let element" style="text-align: center"
         [style.background-color]="
         element.callReason == '1' ? 'orangered' :
         element.callReason == '2' ? 'orangered' :
@@ -87,7 +87,7 @@
         element.callReason == '20' ? 'cyan' :
         element.callReason == '21' ? 'cyan' :
         element.callReason == '22' ? 'cyan' : 'white'">
-      <a href=""></a>
+
                   <p *ngIf="element.callReason == '1'">Pricing</p>
                   <p *ngIf="element.callReason == '2'">Authenticity</p>
                   <p *ngIf="element.callReason == '3'">Financial Issue</p>
@@ -109,173 +109,173 @@
                   <p *ngIf="element.callReason == '19'">Uploaded Combo Order</p>
                   <p *ngIf="element.callReason == '20'">Out of Stock</p>
                   <p *ngIf="element.callReason == '21'">Area Lockdown</p>
-                  <p *ngIf="element.callReason == '22'">For Address Checking</p>
+        <p *ngIf="element.callReason == '22'">For Address Checking</p>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">ORDER ID</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.id}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.id}}</td>
   </ng-container>
 
   <ng-container matColumnDef="staff">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">STAFF</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.staff}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.staff}}</td>
   </ng-container>
 
   <ng-container matColumnDef="customer" sticky>
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 200px">CUSTOMER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.customer}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.customer}}</td>
   </ng-container>
 
   <ng-container matColumnDef="mobileNumber">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">MOBILE PHONE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.mobileNumber}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.mobileNumber}}</td>
   </ng-container>
 
   <ng-container matColumnDef="item">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 170px">PRODUCE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.item}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.item}}</td>
   </ng-container>
 
   <ng-container matColumnDef="province">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">PROVINCE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.province}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.province}}</td>
   </ng-container>
 
   <ng-container matColumnDef="district">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">CITY</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.district}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.district}}</td>
   </ng-container>
 
   <ng-container matColumnDef="subdistrict">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">BARANGAY</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.subdistrict}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.subdistrict}}</td>
   </ng-container>
 
   <ng-container matColumnDef="address">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 200px">ADDRESS</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.address}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.address}}</td>
   </ng-container>
 
   <ng-container matColumnDef="detail">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 200px">DETAIL</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.detail}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.detail}}</td>
   </ng-container>
 
   <ng-container matColumnDef="marketer">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">MARKETER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.marketer}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.marketer}}</td>
   </ng-container>
 
   <ng-container matColumnDef="statusDelivery">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">STATUS COURIER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.statusDelivery}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.statusDelivery}}</td>
   </ng-container>
 
   <ng-container matColumnDef="courier">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">COURIER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.courier}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.courier}}</td>
   </ng-container>
 
   <ng-container matColumnDef="timestamp">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 150px">CREATE DATE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.timestamp | date :'short' }}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.timestamp | date :'short' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PRICE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.price}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.price}}</td>
   </ng-container>
 
   <ng-container matColumnDef="chatPage">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">CHATPAGE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.chatPage}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.chatPage}}</td>
   </ng-container>
 
   <ng-container matColumnDef="addressJnt">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 250px">ADDRESS J&T</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.addressJnt}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.addressJnt}}</td>
   </ng-container>
 
   <ng-container matColumnDef="qty1">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">QT1</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.qty1}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.qty1}}</td>
   </ng-container>
 
   <ng-container matColumnDef="product1">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PRODUCT1</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.product1}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.product1}}</td>
   </ng-container>
 
   <ng-container matColumnDef="qty2">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">QT2</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.qty2}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.qty2}}</td>
   </ng-container>
 
   <ng-container matColumnDef="product2">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PRODUCT2</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.product2}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.product2}}</td>
   </ng-container>
 
   <ng-container matColumnDef="qty3">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">QT3</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.qty3}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.qty3}}</td>
   </ng-container>
 
   <ng-container matColumnDef="product3">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PRODUCT3</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.product3}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.product3}}</td>
   </ng-container>
 
   <ng-container matColumnDef="free">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">FREE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.free}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.free}}</td>
   </ng-container>
 
   <ng-container matColumnDef="freebieProduct">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PREEBIE PRODUCT</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.freebieProduct}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.freebieProduct}}</td>
   </ng-container>
 
   <ng-container matColumnDef="totalProductNames">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">TOTAL PRODUCT NAME</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.totalProductNames}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.totalProductNames}}</td>
   </ng-container>
 
   <ng-container matColumnDef="jntTotalProductTemplate">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">J&T TOTAL PRODUCT TEMPLATE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.jntTotalProductTemplate}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.jntTotalProductTemplate}}</td>
   </ng-container>
 
   <ng-container matColumnDef="jntProductCodeFormula">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">J&T PRODUCT CODE FORMULA </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.jntProductCodeFormula}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.jntProductCodeFormula}}</td>
   </ng-container>
 
   <ng-container matColumnDef="setSale">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> SET </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.setSale}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.setSale}}</td>
   </ng-container>
 
   <ng-container matColumnDef="qty">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> QTY </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.qty}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.qty}}</td>
   </ng-container>
 
   <ng-container matColumnDef="bexProCode">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> BEXCODE </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.bexProCode}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.bexProCode}}</td>
   </ng-container>
 
   <ng-container matColumnDef="brgyCityProvince">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> BRGYCITYPROVINCE </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.brgyCityProvince}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.brgyCityProvince}}</td>
   </ng-container>
 
   <ng-container matColumnDef="addcheck">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> ADDCHECK </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.addcheck}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.addcheck}}</td>
   </ng-container>
 
   <ng-container matColumnDef="odzbyaheros">
@@ -328,12 +328,12 @@
 
   <ng-container matColumnDef="bexBrgy">
     <th mat-header-cell *matHeaderCellDef style="text-align: center"> BEXBRGY </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.bexBrgy}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.bexBrgy}}</td>
   </ng-container>
 
   <ng-container matColumnDef="bexPouches">
     <th mat-header-cell *matHeaderCellDef style="text-align: center"> BEXPOUCHES </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">{{element.bexPouches}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.bexPouches}}</td>
   </ng-container>
 
   <tr class="mat-row" *matNoDataRow>

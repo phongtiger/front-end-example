@@ -89,7 +89,7 @@ export class LegendComponent implements OnInit, AfterViewInit {
       page: this.page,
       size: this.pageSize
     };
-    this.legendService.findAll(params).subscribe(
+    this.legendService.findAllByPage(params).subscribe(
       data => {
         console.log(data);
         if (data != null && data.totalElements != null) {
@@ -119,7 +119,7 @@ export class LegendComponent implements OnInit, AfterViewInit {
       page: this.paginator.pageIndex,
       size: this.paginator.pageSize
     };
-    this.legendService.findAll(params).subscribe(
+    this.legendService.findAllByPage(params).subscribe(
       data => {
         console.log(data);
         if (data != null && data.totalElements != null) {
@@ -167,7 +167,7 @@ export class LegendComponent implements OnInit, AfterViewInit {
       page: this.page,
       size: this.pageSize
     };
-    this.legendService.findAll(params).subscribe(
+    this.legendService.findAllByPage(params).subscribe(
       data => {
         console.log(data);
         if (data != null && data.totalElements != null) {
