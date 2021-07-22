@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {TokenStorageService} from "../auth/token-storage.service";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../auth/auth.service";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-generate-code',
@@ -11,11 +15,54 @@ export class GenerateCodeComponent implements OnInit {
   nameRole: any;
   myControl = new FormControl();
   code = 'Your code is here';
+  role: any;
 
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService,
+              private router: Router,
+              public snackBar: MatSnackBar,
+              private authService: AuthService,
+              private userService: UserService,
+              ) {
+    if (this.tokenStorage.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
+    this.role = this.tokenStorage.getAuthorities();
+    if (this.role.includes('ROLE_ADMIN')) {
+      this.nameRole = 'admin';
+    } else if (this.role.includes('ROLE_PM_MK')) {
+      this.nameRole = 'pmmarketing';
+    } else if (this.role.includes('ROLE_PM_SALE')) {
+      this.snackBar.open('You not have permission', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+      this.router.navigate(['/sale']);
+    } else if (this.role.includes('ROLE_MK')) {
+      this.nameRole = 'marketing';
+    } else if (this.role.includes('ROLE_SALE')) {
+      this.snackBar.open('You not have permission', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+      this.router.navigate(['/sale']);
+    }
+
+  }
 
   ngOnInit(): void {
     this.code = 'Your code is here'
+
+    this.userService.checkToken().subscribe(
+      (data) => {
+        if (0 !== data.error_code) {
+          this.snackBar.open('Token hết hạn!', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+          // this.router.navigate(['/login']);
+        }
+      }
+    )
   }
 
   generateCode() {

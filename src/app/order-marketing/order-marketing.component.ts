@@ -82,6 +82,7 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
               private userService: UserService,
               private _formBuilder: FormBuilder,
               private datePipe : DatePipe) {
+
     if (this.tokenStorage.getToken() == null) {
       this.router.navigate(['/login']);
     }
@@ -95,7 +96,11 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
     } else if (this.role.includes('ROLE_MK')) {
       this.nameRole = 'marketing';
     } else if (this.role.includes('ROLE_SALE')) {
-      this.nameRole = 'sale';
+      this.snackBar.open('You not have permission', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+      this.router.navigate(['/sale']);
     }
   }
   ngAfterViewInit() {
@@ -108,6 +113,19 @@ export class OrderMarketingComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+
+    this.userService.checkToken().subscribe(
+      (data) => {
+        if (0 !== data.error_code) {
+          this.snackBar.open('Token hết hạn!', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+
+        }
+      }
+    )
+
     const params = {
       page: this.page,
       size: this.pageSize

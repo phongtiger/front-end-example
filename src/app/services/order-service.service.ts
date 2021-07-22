@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment.prod";
 
@@ -28,6 +28,9 @@ export class OrderServiceService {
   }
   saveOne(body: any): Observable<any> {
     return this.http.put(environment.url + '/orders/', body,{headers: httpOptions.headers});
+  }
+  getExcel() : Observable<any> {
+    return this.http.get(environment.url + '/orders/excel', {headers: httpOptions.headers, responseType: 'blob' });
   }
 
 }

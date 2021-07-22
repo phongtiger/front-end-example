@@ -2,7 +2,7 @@
   <mat-card-content>
   <form [formGroup]="fromGroup">
     <div  fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field fxFlex="10" appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>C LEVEL</mat-label>
         <mat-select
           formControlName="clevel">
@@ -12,7 +12,7 @@
           <mat-option value="C3" style="background-color: cyan">C3</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>CALL REASON</mat-label>
         <mat-select
           formControlName="callReason">
@@ -43,211 +43,267 @@
 <!--        <mat-label>Id</mat-label>-->
 <!--        <input matInput formControlName="id"-->
 <!--                disabled>      </mat-form-field>-->
-      <mat-form-field fxFlex="10" appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>STAFF</mat-label>
         <input matInput formControlName="staff" type="text" disabled>
       </mat-form-field >
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="8" appearance="fill">
         <mat-label>Customer</mat-label>
         <input matInput  formControlName="customer" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>MOBILE NUMBER</mat-label>
         <input matInput formControlName="mobileNumber" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>PRODUCE</mat-label>
+      <mat-form-field fxFlex="10" appearance="fill">
+        <mat-label>PRODUCT</mat-label>
         <input matInput formControlName="item" type="text">
-      </mat-form-field >
-    </div>
-    <div  fxLayout="row" fxLayoutAlign="space-between center">
+      </mat-form-field>
       <mat-form-field appearance="fill">
+        <mat-label>FULL ADDRESS</mat-label>
+        <input matInput formControlName="address" type="text">
+      </mat-form-field>
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>PROVINCE</mat-label>
         <input matInput formControlName="province" type="text">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="10" appearance="fill">
         <mat-label>CITY</mat-label>
         <input matInput formControlName="district" >
       </mat-form-field >
-      <mat-form-field appearance="fill">
-        <mat-label>Barangay</mat-label>
-        <input matInput formControlName="subdistrict" type="text">
-      </mat-form-field>
-      <mat-form-field fxFlex="12" appearance="fill">
-        <mat-label>MARKETER</mat-label>
-        <input matInput formControlName="marketer" type="text" disabled>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>STATUS DELIVERY</mat-label>
-        <input matInput formControlName="statusDelivery" type="text">
-      </mat-form-field >
-      <mat-form-field appearance="fill">
-        <mat-label>COURIER</mat-label>
-        <input matInput formControlName="courier" type="text">
+      <mat-form-field fxFlex="10" appearance="fill">
+        <mat-label>BARANGAY</mat-label>
+        <input matInput formControlName="barangay" type="text">
       </mat-form-field>
     </div>
-    <div fxLayout="row">
-      <mat-form-field fxFlex="50" appearance="fill">
-        <mat-label>ADDRESS</mat-label>
-        <input matInput formControlName="address" type="text">
+    <div  fxLayout="row" fxLayoutAlign="space-between center">
+
+      <mat-form-field fxFlex="5" appearance="fill">
+        <mat-label>MARKETER</mat-label>
+        <input matInput formControlName="marketer" type="text" disabled>
       </mat-form-field>
       <mat-form-field fxFlex="50" appearance="fill">
         <mat-label>DETAIL</mat-label>
         <input matInput formControlName="detail" type="text">
       </mat-form-field >
-    </div>
-    <div>
-
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field fxFlex="10" appearance="fill">
-        <mat-label>PRICE</mat-label>
-        <input matInput formControlName="price" type="text">
-      </mat-form-field >
       <mat-form-field fxFlex="8" appearance="fill">
+        <mat-label>PRICE</mat-label>
+        <input matInput formControlName="price" type="number">
+      </mat-form-field >
+      <mat-form-field fxFlex="5" appearance="fill">
         <mat-label>QT1</mat-label>
         <input matInput formControlName="qty1" type="text">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>PRODUCT1</mat-label>
-        <input matInput formControlName="product1" type="text">
+        <input matInput
+               type="text"
+               [matAutocomplete]="auto1"
+               formControlName="product1">
+        <mat-autocomplete #auto1="matAutocomplete" >
+          <mat-option *ngFor="let option1 of filteredOptions1 | async" [value]="option1">
+            {{option1}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-
-      <mat-form-field fxFlex="8" appearance="fill">
+      <mat-form-field fxFlex="5" appearance="fill">
         <mat-label>QT2</mat-label>
         <input matInput formControlName="qty2" type="text">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>PRODUCT2</mat-label>
-        <input matInput formControlName="product2" type="text">
+        <input matInput
+               type="text"
+               [matAutocomplete]="auto2"
+               formControlName="product2">
+        <mat-autocomplete #auto2="matAutocomplete" >
+          <mat-option *ngFor="let option2 of filteredOptions2 | async" [value]="option2">
+            {{option2}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field fxFlex="8" appearance="fill">
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field fxFlex="5" appearance="fill">
         <mat-label>QT3</mat-label>
         <input matInput formControlName="qty3" type="text">
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="25" appearance="fill">
         <mat-label>PRODUCT3</mat-label>
-        <input matInput formControlName="product3" type="text">
+        <input matInput
+               type="text"
+               [matAutocomplete]="auto3"
+               formControlName="product3">
+        <mat-autocomplete #auto3="matAutocomplete" >
+          <mat-option *ngFor="let option3 of filteredOptions3 | async" [value]="option3">
+            {{option3}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-
-      <mat-form-field appearance="fill">
-        <mat-label>CHAT PAGE</mat-label>
-        <input matInput formControlName="chatPage" type="text">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="5" appearance="fill">
         <mat-label>FREE</mat-label>
         <input matInput formControlName="free" type="text">
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="20" appearance="fill">
         <mat-label>FREEBIE PRODUCT</mat-label>
-        <input matInput formControlName="freebieProduct" type="text">
+        <input matInput
+               type="text"
+               [matAutocomplete]="autoFree"
+               formControlName="freebieProduct">
+        <mat-autocomplete #autoFree="matAutocomplete" >
+          <mat-option *ngFor="let option4 of filteredOptionsFree | async" [value]="option4">
+            {{option4}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <mat-form-field fxFlex="17" appearance="fill">
+        <mat-label>SPECIALPROMOTION</mat-label>
+        <input matInput
+               type="text"
+               [matAutocomplete]="autoSpec"
+               formControlName="specialPromos">
+        <mat-autocomplete #autoSpec="matAutocomplete" >
+          <mat-option *ngFor="let option5 of filteredOptionsSpec | async" [value]="option5">
+            {{option5}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field fxFlex="5" appearance="fill">
         <mat-label>SET</mat-label>
         <input matInput formControlName="setSale" type="text">
       </mat-form-field>
 
-      <mat-form-field fxFlex="8" appearance="fill">
-        <mat-label>QTY</mat-label>
-        <input matInput formControlName="qty" type="text">
-      </mat-form-field>
-
-    </div>
-    <div fxLayout="row">
-      <mat-form-field fxFlex="50" appearance="fill">
-        <mat-label>ADDRESS JNT</mat-label>
-        <input matInput formControlName="addressJnt" type="text">
-      </mat-form-field >
-      <mat-form-field fxFlex="50" appearance="fill">
-        <mat-label>TOTAL PRODUCT NAMES</mat-label>
-        <input matInput formControlName="totalProductNames" type="text">
-      </mat-form-field>
-      </div>
-    <div fxLayout="row">
-      <mat-form-field fxFlex="50" appearance="fill">
-        <mat-label>JNT TOTAL PRODUCT TEMPLATE</mat-label>
+      <mat-form-field fxFlex="17" appearance="fill">
+        <mat-label>PROVINCE JNT</mat-label>
         <input matInput
                type="text"
-               [matAutocomplete]="auto"
-               formControlName="jntTotalProductTemplate">
-        <mat-autocomplete #auto="matAutocomplete" >
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
+               [matAutocomplete]="autoProvinceJNT"
+               formControlName="provinceJnt">
+        <mat-autocomplete #autoProvinceJNT="matAutocomplete" >
+          <mat-option (onSelectionChange)="onSelectDistrict(option6)" *ngFor="let option6 of filteredOptionsProvinceJNT | async" [value]="option6" >
+            {{option6}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-      <mat-form-field fxFlex="50" appearance="fill">
+
+
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex="15" appearance="fill">
+        <mat-label>CITY JNT</mat-label>
+        <input matInput
+               type="text"
+               [matAutocomplete]="autoCityJNT"
+               formControlName="districtJnt">
+        <mat-autocomplete #autoCityJNT="matAutocomplete" >
+          <mat-option (onSelectionChange)="onSelectCity(option7)" *ngFor="let option7 of filteredOptionsCityJNT | async" [value]="option7" >
+            {{option7}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field >
+      <mat-form-field fxFlex="15" appearance="fill">
+        <mat-label>BARANGAY</mat-label>
+        <input matInput
+               type="text"
+               [matAutocomplete]="autoBarangayJnt"
+               formControlName="barangayJnt">
+        <mat-autocomplete #autoBarangayJnt="matAutocomplete" >
+          <mat-option *ngFor="let option8 of filteredOptionsBarangayJNT | async" [value]="option8" >
+            {{option8}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field fxFlex="15" appearance="fill">
+        <mat-label>DETAIL ADDRESS JNT</mat-label>
+        <input matInput formControlName="detailAddressJnt" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>ADDRESS JNT</mat-label>
+        <input matInput formControlName="addressJnt" type="text">
+      </mat-form-field >
+
+    </div>
+    <div fxLayout="row">
+      <mat-form-field  appearance="fill">
+        <mat-label>TOTAL PRODUCT NAMES</mat-label>
+        <input matInput formControlName="totalProductNames" type="text">
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field fxFlex="10" appearance="fill">
+        <mat-label>CHAT PAGE</mat-label>
+        <input matInput formControlName="chatPage" type="text">
+      </mat-form-field>
+      <mat-form-field fxFlex="18" appearance="fill">
         <mat-label>JNT PRODUCT CODE FORMULA</mat-label>
         <input matInput formControlName="jntProductCodeFormula" type="text">
       </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field appearance="fill">
-        <mat-label>BEXPROCODE</mat-label>
-        <input matInput formControlName="bexProCode" type="text">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>BRGY CITY PROVINCE</mat-label>
-        <input matInput formControlName="brgyCityProvince" type="text">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>ADD CHECK</mat-label>
-        <input matInput formControlName="addcheck" type="text">
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-card>
-        <mat-label>ODZ BYAHEROS</mat-label>
-        <mat-icon *ngIf="data.odzbyaheros === '1'" style="background-color: green">check</mat-icon>
-        <mat-icon *ngIf="data.odzbyaheros === '0'" style="background-color: red">check</mat-icon>
-      </mat-card>
-      <mat-card>
-        <mat-label>JNT COD</mat-label>
+      <mat-card fxFlex="5">
+        <mat-label>JNTCOD</mat-label>
         <mat-icon *ngIf="data.jntCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.jntCod === '0'" style="background-color: red">check</mat-icon>
       </mat-card>
-      <mat-card>
+      <mat-card fxFlex="5">
         <mat-label>NINJACOD</mat-label>
         <mat-icon *ngIf="data.ninjaCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.ninjaCod === '0'" style="background-color: red">check</mat-icon>
       </mat-card>
-      <mat-card>
-        <mat-label>BEXCODE</mat-label>
+      <mat-card fxFlex="5">
+        <mat-label>BEXCOD</mat-label>
         <mat-icon *ngIf="data.bexCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.bexCod === '0'" style="background-color: red">check</mat-icon>
       </mat-card>
-      <mat-card>
+      <mat-card fxFlex="5">
         <mat-label>GOGOCOD</mat-label>
         <mat-icon *ngIf="data.gogoCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.gogoCod === '0'" style="background-color: red">check</mat-icon>
       </mat-card>
-      <mat-card>
+      <mat-card fxFlex="5">
         <mat-label>LBCCOD</mat-label>
         <mat-icon *ngIf="data.lbcCod === '1'" style="background-color: green">check</mat-icon>
         <mat-icon *ngIf="data.lbcCod === '0'" style="background-color: red">check</mat-icon>
       </mat-card>
+      <mat-form-field fxFlex="10" appearance="fill">
+        <mat-label>COURIER</mat-label>
+        <mat-select
+          formControlName="courier">
+          <mat-option value="JNT" style="background-color: orangered">JNT</mat-option>
+          <mat-option value="NINJA" style="background-color: yellow">NINJA</mat-option>
+          <mat-option value="BYAHEROS" style="background-color: lawngreen">BYAHEROS</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="15" appearance="fill">
+        <mat-label>STATUS DELIVERY</mat-label>
+        <input matInput formControlName="statusDelivery" type="text">
+      </mat-form-field >
+      <mat-form-field fxFlex="10" appearance="fill">
+        <mat-label>UP DONE</mat-label>
+        <mat-select formControlName="updon">
+          <mat-option value="1" style="background-color: orangered">NO</mat-option>
+          <mat-option value="2" style="background-color: #009e00">YES</mat-option>
+        </mat-select>
+      </mat-form-field >
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field appearance="fill">
-        <mat-label>BEX BRGY</mat-label>
-        <input matInput formControlName="bexBrgy" type="text">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>BEX POUCHES</mat-label>
-        <input matInput formControlName="bexPouches" type="text">
-      </mat-form-field>
-    </div>
+
+<!--    <div fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>BEX BRGY</mat-label>-->
+<!--        <input matInput formControlName="bexBrgy" type="text">-->
+<!--      </mat-form-field>-->
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>BEX POUCHES</mat-label>-->
+<!--        <input matInput formControlName="bexPouches" type="text">-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
     <div fxLayout="column" fxLayoutAlign="center stretch" >
       <button mat-raised-button color="primary" type="submit" (click)="save()">SAVE</button>
     </div>

@@ -7,11 +7,12 @@
   <div fxLayout="row" fxLayoutAlign="space-around center"  style="height: 65px; margin: 10px;">
     <div>
       <mat-form-field>
-        <mat-select placeholder="NO COPY" formControlName="note">
-          <mat-option value="">All</mat-option>
-          <mat-option value="1">NO COPY</mat-option>
-          <mat-option value="2">HAS COPY</mat-option>
-        </mat-select>
+        <input type="text" matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Phone Number" formControlName="phoneNumber">
       </mat-form-field>
     </div>
     <div>
@@ -22,7 +23,6 @@
           <mat-option value="C1">C1</mat-option>
           <mat-option value="C2">C2</mat-option>
           <mat-option value="C3">C3</mat-option>
-          <mat-option value="C4">C4</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -123,6 +123,11 @@
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.staff}}</td>
   </ng-container>
 
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 150px">CREATE DATE</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.timestamp | date :'short' }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="customer" sticky>
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 200px">CUSTOMER</th>
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.customer}}</td>
@@ -134,7 +139,7 @@
   </ng-container>
 
   <ng-container matColumnDef="item">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 170px">PRODUCE</th>
+    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 170px">PRODUCT</th>
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.item}}</td>
   </ng-container>
 
@@ -148,9 +153,9 @@
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.district}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="subdistrict">
+  <ng-container matColumnDef="barangay">
     <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">BARANGAY</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.subdistrict}}</td>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.barangay}}</td>
   </ng-container>
 
   <ng-container matColumnDef="address">
@@ -168,21 +173,6 @@
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.marketer}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="statusDelivery">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center">STATUS COURIER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.statusDelivery}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="courier">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center">COURIER</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.courier}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="timestamp">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 150px">CREATE DATE</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.timestamp | date :'short' }}</td>
-  </ng-container>
-
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PRICE</th>
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.price}}</td>
@@ -197,6 +187,22 @@
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 250px">ADDRESS J&T</th>
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.addressJnt}}</td>
   </ng-container>
+
+  <ng-container matColumnDef="provinceJnt">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">PROVINCE</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.provinceJnt}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="districtJnt">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">CITY</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.districtJnt}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="barangayJnt">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center ; width: 120px">BARANGAY</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.barangayJnt}}</td>
+  </ng-container>
+
 
   <ng-container matColumnDef="qty1">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">QT1</th>
@@ -236,6 +242,10 @@
   <ng-container matColumnDef="freebieProduct">
     <th mat-header-cell *matHeaderCellDef style="text-align: center">PREEBIE PRODUCT</th>
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.freebieProduct}}</td>
+  </ng-container>
+  <ng-container matColumnDef="specialPromos">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">SPECIALPROMOTION</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.specialPromos}}</td>
   </ng-container>
 
   <ng-container matColumnDef="totalProductNames">
@@ -278,53 +288,73 @@
     <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.addcheck}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="odzbyaheros">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> ODZBYAHEROS</th>
-    <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.odzbyaheros === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.odzbyaheros === '0'" style="background-color: red">check</mat-icon>
-    </td>
-  </ng-container>
+
 
   <ng-container matColumnDef="jntCod">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> J&TCOD</th>
     <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.jntCod === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.jntCod === '0'" style="background-color: red">check</mat-icon>
+      <mat-icon *ngIf="element.jntCod === '1'" style="background-color: #01a001">check</mat-icon>
+      <mat-icon *ngIf="element.jntCod === '0'" style="background-color: red">clear</mat-icon>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="ninjaCod">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> NINJACOD</th>
     <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.ninjaCod === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.ninjaCod === '0'" style="background-color: red">check</mat-icon>
+      <mat-icon *ngIf="element.ninjaCod === '1'" style="background-color: #01a001">check</mat-icon>
+      <mat-icon *ngIf="element.ninjaCod === '0'" style="background-color: red">clear</mat-icon>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="bexCod">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> BEXCOD</th>
     <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.bexCod === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.bexCod === '0'" style="background-color: red">check</mat-icon>
+      <mat-icon *ngIf="element.bexCod === '1'" style="background-color: #01a001">check</mat-icon>
+      <mat-icon *ngIf="element.bexCod === '0'" style="background-color: red">clear</mat-icon>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="gogoCod">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> GOGOCOD</th>
     <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.gogoCod === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.gogoCod === '0'" style="background-color: red">check</mat-icon>
+      <mat-icon *ngIf="element.gogoCod === '1'" style="background-color: #01a001">check</mat-icon>
+      <mat-icon *ngIf="element.gogoCod === '0'" style="background-color: red">clear</mat-icon>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="lbcCod">
     <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px"> LBCCOD</th>
     <td mat-cell *matCellDef="let element" style="text-align: center">
-      <mat-icon *ngIf="element.lbcCod === '1'" style="background-color: green">check</mat-icon>
-      <mat-icon *ngIf="element.lbcCod === '0'" style="background-color: red">check</mat-icon>
+      <mat-icon *ngIf="element.lbcCod === '1'" style="background-color: #01a001">check</mat-icon>
+      <mat-icon *ngIf="element.lbcCod === '0'" style="background-color: red">clear</mat-icon>
     </td>
   </ng-container>
+
+<!--  <ng-container matColumnDef="odzbyaheros">-->
+<!--    <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 80px">CAPABLE DELIVERY </th>-->
+<!--    <td mat-cell *matCellDef="let element" style="text-align: center">-->
+<!--      <mat-icon *ngIf="element.odzbyaheros === '1'" style="background-color: green">check</mat-icon>-->
+<!--      <mat-icon *ngIf="element.odzbyaheros === '0'" style="background-color: red">check</mat-icon>-->
+<!--    </td>-->
+<!--  </ng-container>-->
+
+  <ng-container matColumnDef="courier">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">COURIER</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.courier}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="statusDelivery">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">STATUS COURIER</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">{{element.statusDelivery}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="updon">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">UP DONE</th>
+    <td mat-cell *matCellDef="let element" style="text-align: center" (click)="editOrder(element.id)">
+      <mat-icon *ngIf="element.updon === '2'" style="background-color: #01a001">done</mat-icon>
+      <mat-icon *ngIf="element.updon === '1'" style="background-color: red">clear</mat-icon>
+  </ng-container>
+
 
   <ng-container matColumnDef="bexBrgy">
     <th mat-header-cell *matHeaderCellDef style="text-align: center"> BEXBRGY </th>
@@ -343,401 +373,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<!--  <table class="example-table mat-elevation-z8 mat-table" mat-table recycleRows [dataSource]="dataSource">-->
-<!--    <ng-container matColumnDef="clevel">-->
-<!--      <mat-header-cell *matHeaderCellDef style="text-align: center"> C LEVEL </mat-header-cell>>-->
-<!--      <mat-cell *matCellDef="let element; let i = index;" style="text-align: center">-->
-<!--        <mat-select-->
-<!--          [(value)]="element.clevel"-->
-<!--          [placeholder]="element.clevel"-->
-<!--          [style.background-color]="element.clevel == 'C0'? 'orangered' : element.clevel == 'C1' ? 'yellow' : element.clevel == 'C2' ? 'lawngreen' : element.clevel == 'C3' ? 'cyan' : 'white'">-->
-<!--          <mat-option value="C0" style="background-color: orangered">C0</mat-option>-->
-<!--          <mat-option value="C1" style="background-color: yellow">C1</mat-option>-->
-<!--          <mat-option value="C2" style="background-color: lawngreen">C2</mat-option>-->
-<!--          <mat-option value="C3" style="background-color: cyan">C3</mat-option>-->
-<!--        </mat-select>-->
-<!--      </mat-cell>>-->
-<!--    </ng-container>-->
-<!--    <ng-container matColumnDef="callReason">-->
-<!--      <mat-header-cell *matHeaderCellDef> CALL REASON </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element; let i = index;">-->
-<!--        <mat-form-field floatLabel="never">-->
-<!--          <mat-select-->
-<!--            [(value)]="element.callReason"-->
-<!--            [placeholder]="element.callReason">-->
-<!--            <mat-option value="1" style="background-color: orangered">Pricing</mat-option>-->
-<!--            <mat-option value="2" style="background-color: orangered">Authenticity</mat-option>-->
-<!--            <mat-option value="3" style="background-color: orangered">Not Interested</mat-option>-->
-<!--            <mat-option value="4" style="background-color: orangered">Financial Issue</mat-option>-->
-<!--            <mat-option value="5" style="background-color: orangered">Wrong Customer</mat-option>-->
-<!--            <mat-option value="6" style="background-color: orangered">Invalid Phone Number</mat-option>-->
-<!--            <mat-option value="7" style="background-color: orangered">ODZ</mat-option>-->
-<!--            <mat-option value="8" style="background-color: orangered">Duplicate</mat-option>-->
-<!--            <mat-option value="9" style="background-color: orangered">Scam</mat-option>-->
-<!--            <mat-option value="15" style="background-color: orangered">Too Many Attempts</mat-option>-->
-<!--            <mat-option value="10" style="background-color: yellow">First Attempt</mat-option>-->
-<!--            <mat-option value="11" style="background-color: yellow">Second Attempt</mat-option>-->
-<!--            <mat-option value="12" style="background-color: yellow">Third Attempt</mat-option>-->
-<!--            <mat-option value="13" style="background-color: yellow">Fourth Attempt</mat-option>-->
-<!--            <mat-option value="14" style="background-color: yellow">Fifth Attempt</mat-option>-->
-<!--            <mat-option value="16" style="background-color: lawngreen">Confirmed Single Order</mat-option>-->
-<!--            <mat-option value="17" style="background-color: lawngreen">Uploaded Single Order</mat-option>-->
-<!--            <mat-option value="18" style="background-color: lawngreen">Confirmed Combo Order</mat-option>-->
-<!--            <mat-option value="19" style="background-color: lawngreen">Uploaded Combo Order</mat-option>-->
-<!--            <mat-option value="20" style="background-color: cyan">Out of Stock</mat-option>-->
-<!--            <mat-option value="21" style="background-color: cyan">Area Lockdown</mat-option>-->
-<!--            <mat-option value="22" style="background-color: cyan">For Address Checking</mat-option>-->
-<!--          </mat-select>-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Position Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="id">-->
-<!--      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput-->
-<!--                 [value]="element.id" disabled>-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="staff">-->
-<!--      <mat-header-cell *matHeaderCellDef> STAFF </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element; let i = index;">-->
-<!--        <p>{{element.staff}}</p>-->
-<!--&lt;!&ndash;        <mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;          <input matInput [value]="element.staff" disabled>&ndash;&gt;-->
-<!--&lt;!&ndash;        </mat-form-field>&ndash;&gt;-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="tool" sticky>-->
-<!--      <mat-header-cell *matHeaderCellDef> TOOL </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element; let i = index;">-->
-<!--        <button (click)="saveOne(element.id)"><mat-icon>save</mat-icon></button>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
-<!--    <ng-container matColumnDef="customer" sticky>-->
-<!--      <mat-header-cell *matHeaderCellDef> CUSTOMER </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--&lt;!&ndash;          <button (click)="saveOne(element.id)"><mat-icon>save</mat-icon></button>&ndash;&gt;-->
-<!--          <input matInput-->
-<!--                 [value]="element.customer" >-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="mobileNumber">-->
-<!--      <mat-header-cell *matHeaderCellDef> MOBILE NUMBER </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.mobileNumber">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="item">-->
-<!--      <mat-header-cell *matHeaderCellDef> ITEM </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.item">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="province">-->
-<!--      <mat-header-cell *matHeaderCellDef> PROVINCE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.province">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="district">-->
-<!--      <mat-header-cell *matHeaderCellDef> DISTRICT </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.district">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="subdistrict">-->
-<!--      <mat-header-cell *matHeaderCellDef> BARANGAY </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.subdistrict">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="address">-->
-<!--      <mat-header-cell *matHeaderCellDef> ADDRESS </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.address">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="detail">-->
-<!--      <mat-header-cell *matHeaderCellDef> DETAIL </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field >-->
-<!--          <input matInput [value]="element.detail">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="marketer">-->
-<!--      <mat-header-cell *matHeaderCellDef> MARKETER </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.marketer">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="statusDelivery">-->
-<!--      <mat-header-cell *matHeaderCellDef> STATUS DELIVERY </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.statusDelivery">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="courier">-->
-<!--      <mat-header-cell *matHeaderCellDef> COURIER </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.courier">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="timestamp">-->
-<!--      <mat-header-cell *matHeaderCellDef> CREATE DATE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.timestamp | date :'short'">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-
-<!--    <ng-container matColumnDef="price">-->
-<!--      <mat-header-cell *matHeaderCellDef> PRICE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field floatLabel="never">-->
-<!--          <input matInput placeholder="Symbol" [value]="element.price">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="chatPage">-->
-<!--      <mat-header-cell *matHeaderCellDef> CHAT PAGE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.chatPage">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="addressJnt">-->
-<!--      <mat-header-cell *matHeaderCellDef> ADDRESS JNT </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.addressJnt">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="qty1">-->
-<!--      <mat-header-cell *matHeaderCellDef> QTY1 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.qty1">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="product1">-->
-<!--      <mat-header-cell *matHeaderCellDef> PRODUCT1 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.product1">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="qty2">-->
-<!--      <mat-header-cell *matHeaderCellDef> QTY2 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.qty2">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="product2">-->
-<!--      <mat-header-cell *matHeaderCellDef> PRODUCT2 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.product2">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="qty3">-->
-<!--      <mat-header-cell *matHeaderCellDef> QTY3 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.qty3">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="product3">-->
-<!--      <mat-header-cell *matHeaderCellDef> PRODUCT3 </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.product3">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="free">-->
-<!--      <mat-header-cell *matHeaderCellDef> FREE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.free">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="freebieProduct">-->
-<!--      <mat-header-cell *matHeaderCellDef> FREEBIE PRODUCT </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.freebieProduct">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="totalProductNames">-->
-<!--      <mat-header-cell *matHeaderCellDef> TOTAL PRODUCT NAMES </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.totalProductNames">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="jntTotalProductTemplate">-->
-<!--      <mat-header-cell *matHeaderCellDef> JNT TOTAL PRODUCT TEMPLATE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.jntTotalProductTemplate">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="jntProductCodeFormula">-->
-<!--      <mat-header-cell *matHeaderCellDef> JNT PRODUCT CODE FORMULA </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.jntProductCodeFormula">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="setSale">-->
-<!--      <mat-header-cell *matHeaderCellDef> SET </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.setSale" >-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="qty">-->
-<!--      <mat-header-cell *matHeaderCellDef> QTY </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.qty">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="bexProCode">-->
-<!--      <mat-header-cell *matHeaderCellDef> BEX PRO CODE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.bexProCode">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="brgyCityProvince">-->
-<!--      <mat-header-cell *matHeaderCellDef> BRGY CITY PROVINCE </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.brgyCityProvince">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="addcheck">-->
-<!--      <mat-header-cell *matHeaderCellDef> ADD CHECK </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.addcheck">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="odzbyaheros">-->
-<!--      <mat-header-cell *matHeaderCellDef> ODZ BYAHEROS </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.odzbyaheros === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.odzbyaheros === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="jntCod">-->
-<!--      <mat-header-cell *matHeaderCellDef> JNT COD </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.jntCod === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.jntCod === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
-<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="ninjaCod">-->
-<!--      <mat-header-cell *matHeaderCellDef> NINJA COD</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.ninjaCod === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.ninjaCod === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="bexCod">-->
-<!--      <mat-header-cell *matHeaderCellDef> BEX COD </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.bexCod === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.bexCod === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="gogoCod">-->
-<!--      <mat-header-cell *matHeaderCellDef> ODZ GOGO </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.gogoCod === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.gogoCod === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="lbcCod">-->
-<!--      <mat-header-cell *matHeaderCellDef> ODZ LBC </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--          <mat-icon *ngIf="element.lbcCod === '1'" style="background-color: green">check</mat-icon>-->
-<!--          <mat-icon *ngIf="element.lbcCod === '0'" style="background-color: red">check</mat-icon>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-
-<!--    <ng-container matColumnDef="bexBrgy">-->
-<!--      <mat-header-cell *matHeaderCellDef> BEX BRGY </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.bexBrgy">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>&lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="bexPouches">-->
-<!--      <mat-header-cell *matHeaderCellDef> BEX POUCHES </mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element ; let i = index;">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput [value]="element.bexPouches">-->
-<!--        </mat-form-field>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
-
-<!--    &lt;!&ndash; Fav Column &ndash;&gt;-->
-
-
-<!--    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
-<!--    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-<!--  </table>-->
   <div fxLayout="row" fxLayoutAlign="start start" >
   <mat-paginator [length]="length"
                  [pageSizeOptions]="[50, 100, 150, 200]"

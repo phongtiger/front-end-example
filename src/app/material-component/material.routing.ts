@@ -24,6 +24,7 @@ import {AdminComponent} from '../admin/admin.component';
 import {LegendComponent} from '../legend/legend.component';
 import {GenerateCodeComponent} from "../generate-code/generate-code.component";
 import {EditOrderComponent} from "../edit-order/edit-order.component";
+import {ReportComponent} from "../report/report.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -121,5 +122,9 @@ export const MaterialRoutes: Routes = [
   {
     path: 'editorder/:id',
     component: EditOrderComponent
+  },
+  {
+    path: 'report',
+    component: ReportComponent
   }
 ];

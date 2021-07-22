@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {MatPaginator} from "@angular/material/paginator";
 import {FormControl, FormGroup} from "@angular/forms";
+import {DatePipe} from "@angular/common";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-order-sale',
@@ -20,21 +22,22 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     'callReason',
     'id',
     'staff',
+    'timestamp',
     'customer',
     'mobileNumber',
     'item',
     'province',
     'district',
-    'subdistrict',
+    'barangay',
     'address',
     'detail',
     'marketer',
-    'statusDelivery',
-    'courier',
-    'timestamp',
     'price',
     'chatPage',
     'addressJnt',
+    'provinceJnt',
+    'districtJnt',
+    'barangayJnt',
     'qty1',
     'product1',
     'qty2',
@@ -43,6 +46,7 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     'product3',
     'free',
     'freebieProduct',
+    'specialPromos',
     'totalProductNames',
     'jntTotalProductTemplate',
     'jntProductCodeFormula',
@@ -52,12 +56,16 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     'brgyCityProvince',
     'addcheck',
 
-    'odzbyaheros',
     'jntCod',
     'ninjaCod',
     'bexCod',
     'gogoCod',
     'lbcCod',
+
+    'statusDelivery',
+    'courier',
+    'updon',
+
     'bexBrgy',
     'bexPouches'
   ];
@@ -73,7 +81,8 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
   searchForm= new FormGroup({
     fromDate: new FormControl(),
     toDate: new FormControl(),
-    note: new FormControl(),
+    name: new FormControl(),
+    phoneNumber: new FormControl(),
     cLevel: new FormControl()
   });
   range = new FormGroup({
@@ -88,13 +97,47 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
               public snackBar: MatSnackBar,
               private authService: AuthService,
               public tokenStorage: TokenStorageService,
-              private router: Router) {
+              private router: Router,
+              private datePipe : DatePipe,
+              private userService: UserService) {
+
     if (this.tokenStorage.getToken() == null) {
       this.router.navigate(['/login']);
+    }
+    this.role = this.tokenStorage.getAuthorities();
+    if (this.role.includes('ROLE_ADMIN')) {
+      this.nameRole = 'admin';
+    } else if (this.role.includes('ROLE_PM_MK')) {
+      this.snackBar.open('You not have permission', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+      this.router.navigate(['/marketing']);
+    } else if (this.role.includes('ROLE_PM_SALE')) {
+      this.nameRole = 'pmsale';
+    } else if (this.role.includes('ROLE_MK')) {
+      this.snackBar.open('You not have permission', 'Close', {
+        duration: 8000,
+        panelClass: ['mat-toolbar', 'mat-warn']
+      });
+      this.router.navigate(['/marketing']);
+    } else if (this.role.includes('ROLE_SALE')) {
+      this.nameRole = 'sale';
     }
   }
 
   ngOnInit(): void {
+    this.userService.checkToken().subscribe(
+      (data) => {
+        if (0 !== data.error_code) {
+          this.snackBar.open('Token hết hạn!', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+          // this.router.navigate(['/login']);
+        }
+      }
+    )
     this.loading = true;
     const params = {
       page: this.page,
@@ -119,7 +162,7 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
     this.initData(params);
   }
 
-  private initData(params: { size: number; page: number }) {
+  private initData(params: any) {
     this.orderService.getOrderBySale(params).subscribe(
       data => {
         console.log(data);
@@ -144,7 +187,21 @@ export class OrderSaleComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-
+    console.log(this.searchForm.value)
+    const fromDa = this.datePipe.transform(this.searchForm.value.fromDate, 'dd-MM-yyyy');
+    const toDa =this.datePipe.transform(this.searchForm.value.toDate, 'dd-MM-yyyy');
+    console.log(fromDa)
+    console.log(toDa)
+    const params = {
+      page: this.page,
+      size: this.pageSize,
+      name: this.searchForm.value.name,
+      phoneNumber: this.searchForm.value.phoneNumber,
+      cLevel: this.searchForm.value.cLevel,
+      fromDate: fromDa,
+      toDate: toDa
+    };
+    this.initData(params);
   }
 
   saveOne(id: number) {
@@ -165,16 +222,22 @@ export interface Element {
   item: string;
   province: string;
   district: string;
-  subdistrict: string;
+  barangay: string;
   address: string;
   detail: string;
   marketer: string;
+
   statusDelivery: string;
   courier: string;
+  updon: string;
+
   timestamp: string;
   price: string;
   chatPage: string;
   addressJnt: string;
+  provinceJnt: string;
+  districtJnt: string;
+  barangayJnt: string;
   qty1: string;
   product1: string;
   qty2: string;
@@ -183,6 +246,7 @@ export interface Element {
   product3: string;
   free: string;
   freebieProduct: string;
+  specialPromos: string;
   totalProductNames: string;
   jntTotalProductTemplate: string;
   jntProductCodeFormula: string;
@@ -192,7 +256,7 @@ export interface Element {
   brgyCityProvince: string;
   addcheck: string;
 
-  odzbyaheros: string;
+  // odzbyaheros: string;
   jntCod: string;
   ninjaCod: string;
   bexCod: string;

@@ -49,6 +49,7 @@ export class AccountComponent implements OnInit {
               public snackBar: MatSnackBar,
               private userService: UserService) {
     this.activityData = activities;
+
     if (this.tokenStorage.getToken() == null) {
       this.router.navigate(['/login']);
     }
@@ -71,6 +72,20 @@ export class AccountComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.userService.checkToken().subscribe(
+      data => {
+        console.log(data)
+        if (0 !== data.error_code) {
+          this.snackBar.open('Token hết hạn!', 'Close', {
+            duration: 8000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+          // this.router.navigate(['/login']);
+        }
+      }
+    )
+
     this.errorMK = false;
     this.userService.getUserBoard().subscribe( res => {
       this.dataSource = res;

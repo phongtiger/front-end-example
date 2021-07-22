@@ -8,6 +8,7 @@ export interface Menu {
 }
 
 const MENUITEMS = [
+  {state: 'report', type: 'link', name: 'Excel', icon: 'code'},
   {state: 'code', type: 'link', name: 'Generate Code', icon: 'code'},
   {state: 'legend', type: 'link', name: 'Legend', icon: 'import_contacts'},
   {state: 'marketing', type: 'link', name: 'Order Marketing', icon: 'add_shopping_cart'},

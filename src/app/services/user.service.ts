@@ -21,6 +21,10 @@ export class UserService {
   changePassword(u: UserInfo): Observable<any> {
     return this.http.put(environment.url + '/users/pass', u, { headers: httpOptions.headers});
   }
+
+  checkToken(): Observable<any> {
+    return this.http.get(environment.url + '/auth/check-token', {headers: httpOptions.headers});
+  }
   //
   // getAdminBoard(): Observable<string> {
   //   return this.http.get(environment.url, { responseType: 'text' });
